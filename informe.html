@@ -4,35 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informes</title>
-    <link rel="shortcut icon" type="image/png" href="favicon-16x16.png" />
+    <link rel="shortcut icon" type="image/png" href="img/icons/favicon-16x16.png"/>
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="CSS/pages/informes.css">
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <header>
       <!--Barra de logo portal-->
-      <div class="header-page"  style="background-color: black;">
+      <div class="header-page">
         <a href="index.html">
-            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo"/>
-        </a>   
+            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo" width="150px" />
+        </a>
       </div>
       <!--Barra de menú principal-->
-      <ul>
-        <li><a href="paso.html">PASOS</a></li>
-        <li><a href="general.html">Generales</a></li>
-        <li><a class="active" href="index.html">INICIO</a></li>
-       <!-- <li><a href="contact">Contacto</a></li>-->
-      </ul>
+      
+      <div class="menu-page"> 
+        <ul>
+          <li class="consultar-menu"><h4>Consultar: </h4></li>
+          <li>
+            <a href="paso.html" class="boton-menu botones-paso-generales" id="boton-paso">
+              PASOS
+            </a>
+          </li>
+          <li>
+            <a href="general.html"  class="boton-menu botones-paso-generales" id="boton-generales">
+              Generales
+            </a>
+          </li>
+          <li>
+            <a  href="informe.html"  class="boton-menu" id="boton-informe">
+              INFORMES
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
     <!-- Contenido principal de la página -->
     <main>
+      <section>
+        <div class="mensaje-usuario" id="msj-verde" style="background-color: #28a745;"><i class="fa-solid fa-thumbs-up iconos"></i>Se agrego con exito el resultado al informe</div>
+        <div class="mensaje-usuario" id="msj-rojo" style="background-color: #dc3545;"><i class="fa-solid fa-triangle-exclamation iconos"></i>Error:Se produjo un error al intentar agregar resultados al informe</div>
+        <div class="mensaje-usuario" id="msj-amarillo" style="background-color: #ffc107;"><i class="fa-solid fa-exclamation iconos"></i>La operacion no se pudo completar</div>
+      </section>
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
-        <h2>Reporte de elecciones</h2>
-        <div style="width: 100%; height: 400px; overflow: auto;">
-          <table border="2">
-            <thead style="position: sticky; top: 0;">
+        <h1>Reporte de elecciones</h1>
+        <div class="div-tabla-eleccionas">
+          <table class="tabla-elecciones">
+            <thead class="tabla-head">
               <tr>
                 <th>PROVINCIAS</th>
               
@@ -44,44 +65,78 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="tr-body">
 
-                <td>
+                <td class="td-eleccion">
                   <div>
-                   <img src="img/mapas/buenos-aires.svg" alt="Mapa Buenos Aires">
+                   <img src="img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
                   </div>  
                 </td>
 
-                <td>
-                  <h4>Elecciones generales | 2021</h4>
+                <td  class="td-eleccion year-eleccion">
+                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
+                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
                 </td>
 
-                <td>
-                  <div>
-                    <img src="img/icons/urna.svg" alt="urna" width="50px">
-                    <h4>Mesas computadas</h4>
-                    <p>2,586</p>
-                  </div>
-                  <div>
-                    <img src="img/icons/electores.svg" alt="" width="50px">
-                    <h4>Electores</h4>
-                    <p>876,580</p>
-                  </div>
-                  <div>
-                    <img src="img/icons/part-escrutado.svg" alt="" width="50px">
-                    <h4>Participacion sobre escrutinios</h4>
-                    <p>65,2%</p>
+                <td class="td-eleccion datos-generales">
+                  <div id="info-mesas-informe">
+
+                    <div class="info-mesas-individual-informe" id="mesas-computadas">
+                      <img src="img/icons/urna.svg" alt="urna" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Mesas computadas</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="electores">
+                      <img src="img/icons/electores.svg" alt="electores" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Electores</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="escrutados">
+                      <img src="img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
+                      <p class="p-informe">62,71%</p>
+                    </div>
+        
                   </div>
                 </td>
 
-                <td>
-                  <table>
+                <td class="td-eleccion datos-agrupacion">
+                  <table class="tabla-agrupacion">
                     <tbody>
-                      <tr>
-                        <td>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
                           <h5>Juntos</h5>
                         </td>
-                        <td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
                           <p>30%</p>
                           <p>3.000.000 votos</p>
                         </td>
@@ -92,44 +147,124 @@
 
               </tr>
 
-              <tr>
+              <tr class="tr-body">
 
-                <td>
+                <td class="td-eleccion">
                   <div>
-                   <img src="img/mapas/santa-fe.svg" alt="Mapa Santa Fe">
+                   <img src="img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
                   </div>  
                 </td>
 
-                <td>
-                  <h4>Elecciones generales | 2021</h4>
+                <td  class="td-eleccion year-eleccion">
+                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
+                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
                 </td>
 
-                <td>
-                  <div>
-                    <img src="img/icons/urna.svg" alt="urna" width="50px">
-                    <h4>Mesas computadas</h4>
-                    <p>2,586</p>
-                  </div>
-                  <div>
-                    <img src="img/icons/electores.svg" alt="" width="50px">
-                    <h4>Electores</h4>
-                    <p>876,580</p>
-                  </div>
-                  <div>
-                    <img src="img/icons/part-escrutado.svg" alt="" width="50px">
-                    <h4>Participacion sobre escrutinios</h4>
-                    <p>65,2%</p>
+                <td class="td-eleccion datos-generales">
+                  <div id="info-mesas-informe">
+
+                    <div class="info-mesas-individual-informe" id="mesas-computadas">
+                      <img src="img/icons/urna.svg" alt="urna" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Mesas computadas</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="electores">
+                      <img src="img/icons/electores.svg" alt="electores" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Electores</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="escrutados">
+                      <img src="img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
+                      <p class="p-informe">62,71%</p>
+                    </div>
+        
                   </div>
                 </td>
 
-                <td>
-                  <table>
+                <td class="td-eleccion datos-agrupacion">
+                  <table >
                     <tbody>
-                      <tr>
-                        <td>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
                           <h5>Juntos</h5>
                         </td>
-                        <td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+
+              </tr>
+
+              <tr class="tr-body">
+
+                <td class="td-eleccion">
+                  <div>
+                   <img src="img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
+                  </div>  
+                </td>
+
+                <td  class="td-eleccion year-eleccion">
+                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
+                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
+                </td>
+
+                <td class="td-eleccion datos-generales">
+                  <div id="info-mesas-informe">
+
+                    <div class="info-mesas-individual-informe" id="mesas-computadas">
+                      <img src="img/icons/urna.svg" alt="urna" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Mesas computadas</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="electores">
+                      <img src="img/icons/electores.svg" alt="electores" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Electores</h4>
+                      <p class="p-informe">62.71%</p>
+                    </div>
+        
+                    <div class="info-mesas-individual-informe" id="escrutados">
+                      <img src="img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70" class="imagen-informe">
+                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
+                      <p class="p-informe">62,71%</p>
+                    </div>
+        
+                  </div>
+                </td>
+
+                <td class="td-eleccion datos-agrupacion">
+                  <table >
+                    <tbody>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
+                          <p>30%</p>
+                          <p>3.000.000 votos</p>
+                        </td>
+                      </tr>
+                      <tr class="tabla-agrupacion">
+                        <td class="grupo">
+                          <h5>Juntos</h5>
+                        </td>
+                        <td class="numeros">
                           <p>30%</p>
                           <p>3.000.000 votos</p>
                         </td>
@@ -149,19 +284,19 @@
       </section>
     </main>
     <!--Pie de página-->
-    <footer>
-      <div>
-        <img src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
-        <img src="img/Logo_DINE_negativo.png" alt="">
-        <img src="img/icons/logos_001-10.4430c8d5.png" alt="">
+    <footer class="footer-page">
+      <div class="grupo-img-footer">
+        <img class="img-footer" src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
+        <img class="img-footer" src="img/Logo_DINE_negativo.png" alt="">
+        <img class="img-footer" src="img/icons/logos_001-10.4430c8d5.png" alt="">
       </div>
-      <div>
+      <div class="p-footer">
         <p>
           “Resultados Provisorios en base a telegramas recibidos (Art. 43 Ley 26571 y Art. 105 Ley 19945). Los 
           porcentajes de las agrupaciones políticas son calculados sobre los votos válidos (PASO) conforme al art. 
           45 Ley 26.571 y afirmativos (Generales). No se incluyen los votos correspondientes a los electores 
           residentes en el exterior ni privados de la libertad. Al usar este sitio usted acepta los 
-          <a href="terminos-condiciones.html">Términos y Condiciones.</a>
+          <a href="terminos-condiciones.html">Términos y Condiciones</a>."
         </p>
       </div>
     </footer>

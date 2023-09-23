@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Publicación de Resultados Electorales</title>
-    <link rel="shortcut icon" type="image/png" href="favicon-16x16.png" />
+    <link rel="shortcut icon" type="image/png" href="img/icons/favicon-16x16.png" />
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="CSS/pages/index.css">
     <link rel="stylesheet" href="css/common.css" />
@@ -12,72 +12,104 @@
   <body>
     <header>
       <!--Barra de logo portal-->
-      <div class="header-page" style="background-color: black;">
+
+      <div class="header-page">
         <a href="index.html">
-            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo"  />
+            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo" width="150px" />
         </a>
       </div>
       <!--Barra de menú principal-->
-      <ul>
-        <li><a class="active" href="informe.html">INFORMES</a></li>
-       <!-- <li><a href="contact">Contacto</a></li>-->
-      </ul>
+      
+      <div class="menu-page"> 
+        <ul>
+          <li class="consultar-menu"><h4>Consultar:</h4></li>
+          <li>
+            <a href="paso.html" class="boton-menu botones-paso-generales" id="boton-paso">
+              PASOS
+            </a>
+          </li>
+          <li>
+            <a href="general.html"  class="boton-menu botones-paso-generales" id="boton-generales">
+              Generales
+            </a>
+          </li>
+          <li>
+            <a  href="informe.html"  class="boton-menu" id="boton-informe">
+              INFORMES
+            </a>
+          </li>
+        </ul>
+        <div class="menu-mobile"> 
+          <a href="javascript:void(0);" class="icon" onclick="abrirMenu()">
+            <img class="img-menu-mobile" id="boton-desplegar" src="/img/icons/icon-menu.svg" alt="">
+          </a>  
+        </div>
     </header>
+
     <!-- Contenido principal de la página -->
     <main>
+      
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
-        <h2>Resultados electorales</h2>
-        <p>“La Dirección Nacional Electoral y el Observatorio Político Electoral del Ministerio 
-            del Interior ponen a disposición una herramienta de búsqueda avanzada y generación 
-            de informes personalizados con los resultados provisionales de las elecciones 
-            desarrolladas en los últimos años.
-            Los resultados que se presentan son los correspondientes a escrutinios provisorios de 
-            elecciones nacionales. Dicho recuento es responsabilidad de la DINE. También se 
-            presentan los resultados provisionales de las elecciones provinciales y/o locales 
-            realizados bajo la adhesión a ley de simultaneidad.</p>
-        <div>
-            <img src="img/images.png" alt="">
+        <h1>Resultados Electorales</h1>
+        <div class="p-grid">  
+          <p>La Dirección Nacional Electoral y el Observatorio Político Electoral del Ministerio 
+              del Interior ponen a disposición una herramienta de búsqueda avanzada y generación 
+              de informes personalizados con los resultados provisionales de las elecciones 
+              desarrolladas en los últimos años.
+              <br> resultados que se presentan son los correspondientes a escrutinios provisorios de 
+              elecciones nacionales. Dicho recuento es responsabilidad de la DINE. También se 
+              presentan los resultados provisionales de las elecciones provinciales y/o locales 
+              realizados bajo la adhesión a ley de simultaneidad.</p>
+        </div>
+        <div id="imagen-index" class="img-grid">
+            <img src="img/images.png" alt="imagen data">
         </div>
       </section>
+
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
-        <h3>elecciones 2021</h3>
-        <p>Resultados Provinciales</p>
-        <div class="pasos-generales">
-            <a href="paso.html">  
-              <img src="img/icons/urna.svg" alt="urna">
+        <h2>Elecciones 2021</h2>
+        <p>Seleccione el tipo de elección que quiere consultar</p>
+
+        <a href="paso.html" class="paso-generales paso">
+         
+          <img src="img/icons/urna.svg" alt="urna" height="60px">
                 <h3>
                     PASOS
-                </h3>
-            </a>     
-        </div>
-        <div class="pasos-generales"">
-            <a href="general.html">
-                <img src="img/icons/urna.svg" alt="urna">
-                <h3>
-                    Generales
-                </h3>
-            </a>
-        </div>
+                </h3>    
+
+        </a>
+
+        <a href="general.html" class="paso-generales generales">
+
+          <img src="img/icons/urna.svg" alt="urna" height="60px">
+              <h3>
+                Generales
+              </h3>
+
+          </a>
       </section>
     </main>
     <!--Pie de página-->
-    <footer>
-      <div>
-        <img src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
-        <img src="img/Logo_DINE_negativo.png" alt="">
-        <img src="img/icons/logos_001-10.4430c8d5.png" alt="">
+    <footer class="footer-page">
+      <div class="grupo-img-footer">
+        <img class="img-footer" src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
+        <img class="img-footer" src="img/Logo_DINE_negativo.png" alt="">
+        <img class="img-footer" src="img/icons/logos_001-10.4430c8d5.png" alt="">
       </div>
-      <div>
+      <div class="p-footer">
         <p>
           “Resultados Provisorios en base a telegramas recibidos (Art. 43 Ley 26571 y Art. 105 Ley 19945). Los 
           porcentajes de las agrupaciones políticas son calculados sobre los votos válidos (PASO) conforme al art. 
           45 Ley 26.571 y afirmativos (Generales). No se incluyen los votos correspondientes a los electores 
           residentes en el exterior ni privados de la libertad. Al usar este sitio usted acepta los 
-          <a href="terminos-condiciones.html">Términos y Condiciones.</a>
+          <a href="terminos-condiciones.html">Términos y Condiciones</a>."
         </p>
       </div>
     </footer>
+    
+    <script src="/js/pages/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   </body>
 </html>
