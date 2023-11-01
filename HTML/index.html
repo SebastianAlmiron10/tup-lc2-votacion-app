@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Publicación de Resultados Electorales</title>
-    <link rel="shortcut icon" type="image/png" href="img/icons/favicon-16x16.png" />
+    <link rel="shortcut icon" type="image/png" href="../img/icons/favicon-16x16.png" />
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="./CSS/pages/index.css">
-    <link rel="stylesheet" href="./CSS/common.css" />
+    <link rel="stylesheet" href="../CSS/pages/index.css">
+    <link rel="stylesheet" href="../CSS/common.css" />
   </head>
   <body>
     <header>
@@ -15,8 +15,12 @@
 
       <div class="header-page">
         <a href="index.html">
-            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo" width="150px" />
+            <img src="../img/Logo_DINE_negativo.png" alt="logo" class="logo" width="132px" />
         </a>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        
       </div>
       <!--Barra de menú principal-->
       
@@ -41,7 +45,7 @@
         </ul>
         <div class="menu-mobile"> 
           <a href="javascript:void(0);" class="icon" onclick="abrirMenu()">
-            <img class="img-menu-mobile" id="boton-desplegar" src="/img/icons/icon-menu.svg" alt="">
+            <img class="img-menu-mobile" id="boton-desplegar" src="../img/icons/icon-menu.svg" alt="">
           </a>  
         </div>
     </header>
@@ -51,8 +55,9 @@
       
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
-        <h1>Resultados Electorales</h1>
-        <div class="p-grid">  
+        
+        <div class="p-grid div-sec">
+          <h1>Resultados Electorales</h1>
           <p>La Dirección Nacional Electoral y el Observatorio Político Electoral del Ministerio 
               del Interior ponen a disposición una herramienta de búsqueda avanzada y generación 
               de informes personalizados con los resultados provisionales de las elecciones 
@@ -62,41 +67,44 @@
               presentan los resultados provisionales de las elecciones provinciales y/o locales 
               realizados bajo la adhesión a ley de simultaneidad.</p>
         </div>
-        <div id="imagen-index" class="img-grid">
-            <img src="img/images.png" alt="imagen data">
+        <div id="imagen-index" class="img-grid div-sec">
+            <img src="../img/f-procesamiento-de-datos-power-bi.jpg" alt="imagen data">
         </div>
       </section>
 
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
-        <h2>Elecciones 2021</h2>
-        <p>Seleccione el tipo de elección que quiere consultar</p>
-
-        <a href="paso.html" class="paso-generales paso">
-         
-          <img src="img/icons/urna.svg" alt="urna" height="60px">
-                <h3>
-                    PASOS
-                </h3>    
-
-        </a>
-
-        <a href="general.html" class="paso-generales generales">
-
-          <img src="img/icons/urna.svg" alt="urna" height="60px">
-              <h3>
-                Generales
-              </h3>
-
+        <div class="sec-contenido-div">
+          <div class="sec-contenido-div-hijo">
+            <h2>Elecciones 2021</h2>
+            <p>Seleccione el tipo de elección que quiere consultar</p>
+          </div>
+          <div class="sec-contenido-div-hijo-spacer">
+          </div>
+        </div>
+        <div class="sec-contenido-div-PG">
+          <a href="./paso.html" class="paso-generales paso">
+            <img src="../img/icons/urna.svg" alt="urna" height="60px">
+            <h3>
+                PASOS
+            </h3>    
           </a>
+
+          <a href="./general.html" class="paso-generales generales">
+            <img src="../img/icons/urna.svg" alt="urna" height="60px">
+            <h3>
+              Generales
+            </h3>
+            </a>
+        </div>
       </section>
     </main>
     <!--Pie de página-->
     <footer class="footer-page">
       <div class="grupo-img-footer">
-        <img class="img-footer" src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
-        <img class="img-footer" src="img/Logo_DINE_negativo.png" alt="">
-        <img class="img-footer" src="img/icons/logos_001-10.4430c8d5.png" alt="">
+        <img class="img-footer" src="../img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="Ministerio">
+        <img class="img-footer" src="../img/Logo_DINE_negativo.png" alt="DINE">
+        <img class="img-footer" src="../img/icons/logos_001-10.4430c8d5.png" alt="Icon">
       </div>
       <div class="p-footer">
         <p>
@@ -104,7 +112,7 @@
           porcentajes de las agrupaciones políticas son calculados sobre los votos válidos (PASO) conforme al art. 
           45 Ley 26.571 y afirmativos (Generales). No se incluyen los votos correspondientes a los electores 
           residentes en el exterior ni privados de la libertad. Al usar este sitio usted acepta los 
-          <a href="terminos-condiciones.html">Términos y Condiciones</a>."
+          <a href="./terminos-condiciones.html">Términos y Condiciones</a>."
         </p>
       </div>
     </footer>

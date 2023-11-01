@@ -3,29 +3,31 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generales</title>
-    <script src="general.js"></script>
-    <link rel="shortcut icon" type="image/png" href="img/icons/favicon-16x16.png" />
+    <title>PASO</title>
+    <script src="../general.js"></script>
+    <link rel="shortcut icon" type="image/png" href="../img/icons/favicon-16x16.png" />
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="./CSS/pages/generales.css">
-    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="../CSS/pages/generales.css">
+    <link rel="stylesheet" href="../CSS/common.css" />
     <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <header>
       <!--Barra de logo portal-->
       <div class="header-page">
-        <a href="index.html">
-            <img src="img/Logo_DINE_negativo.png" alt="logo" class="logo" width="150px" />
+        <a href="./index.html">
+            <img src="../img/Logo_DINE_negativo.png" alt="logo" class="logo" width="132px" />
         </a>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
       </div>
       <!--Barra de menú principal-->
       <div class="menu-page-pasos-generales">
         <ul>
           <li class="filtros">
-            <label for="filtro-year">Año</label>
             <select name="filtro-year" id="filtro-year" class="filtro">
-              <option value="" disabled selected></option>
+              <option value="" disable selected hidden>Año</option>
               <option value="">2023</option>
               <option value="">2022</option>
               <option value="">2021</option>
@@ -34,9 +36,8 @@
           </li>
 
           <li class="filtros">
-            <label for="filtro-cargo">Cargo</label>
             <select name="filtro-cargo" id="filtro-cargo" class="filtro">
-              <option value="" disabled selected></option>
+              <option value="" disable selected hidden>Cargo</option>
               <option value="">Presidente</option>
               <option value="">Gobernado</option>
               <option value="">Jefe de Gobierno</option>
@@ -45,31 +46,37 @@
           </li>
 
           <li class="filtros">
-            <label for="filtro-distrito">Distrito</label>
             <select name="filtro-distrito" id="filtro-distrito">
-              <option value="" disabled selected></option>
+              <option value="" disable selected hidden>Distrito</option>
               <option value="">Capital</option>
               <option value="">La Plata</option>
             </select>
           </li>
 
           <li class="filtros">
-            <input style="background: url(/img/icons/urna.svg) no-repeat; padding:0px 25px;background-color: rgb(255, 255, 255);" type="text" id="filtrar" name="filtrar" placeholder="FILTRAR">
+            <button id="filtrar" name="filtrar"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000;"></i>FILTRAR</button>
           </li>
 
           <li>
-            <a href="paso.html" class="boton-menu botones-paso-generales" id="boton-paso">
-              PASOS
+            <a href="./general.html" class="boton-menu botones-paso-generales" id="boton-generales">
+              Generales
             </a>
           </li>
 
           <li>
-            <a  href="informe.html"  class="boton-menu" id="boton-informe">
+            <a  href="./informe.html"  class="boton-menu" id="boton-informe">
               INFORMES
             </a>
           </li>
 
         <!-- <li><a href="contact">Contacto</a></li>-->
+        </ul>
+        <ul>
+          <li>
+            <a  href="./index.html"  class="boton-menu" id="boton-informe">
+              INICIO
+            </a>
+          </li>
         </ul>
       </div>
     </header>
@@ -87,24 +94,24 @@
       </section>
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
-        <button class="agregar-informe">+Agregar a informe</button>
+        <button class="agregar-informe">+ Agregar a informe</button>
 
           <div id="info-mesas">
 
             <div class="info-mesas-individual" id="mesas-computadas">
-              <img class="imagen-generales" src="img/icons/urna.svg" alt="urna" width="70" height="70">
+              <img class="imagen-generales" src="../img/icons/urna.svg" alt="urna" width="70" height="70">
               <h4 class="h4-generales">Mesas computadas</h4>
               <p class="p-generales">2,586</p>
             </div>
 
             <div class="info-mesas-individual" id="electores">
-              <img class="imagen-generales" src="img/icons/electores.svg" alt="electores" width="70" height="70">
+              <img class="imagen-generales" src="../img/icons/electores.svg" alt="electores" width="70" height="70">
               <h4 class="h4-generales" id="posicion">Electores</h4>
               <p class="p-generales">876,580</p>
             </div>
 
             <div class="info-mesas-individual" id="escrutados">
-              <img class="imagen-generales" src="img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
+              <img class="imagen-generales" src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
               <h4 class="h4-generales">Participacion sobre escrutinios</h4>
               <p class="p-generales">65,2%</p>
               </div>
@@ -215,23 +222,23 @@
 
         <div class="mapa item">
           <div class="title"><h4>Buenos Aires</h4></div>
-          <div class="provin"><img src="img/mapas/svgviewer-png-output1.png" alt="BUENOS AIRES" width="150" height="200"></div>
+          <div class="provin"><img src="../img/mapas/svgviewer-png-output1.png" alt="BUENOS AIRES" width="150"></div>
         </div>
 
         <div class="chart-wrap horizontal resumen-votos item">
 
           <div class="title"><h4>Resumenes de Votos</h4></div>
 
-          <div class="grid">
+          <div class="grid ">
 
-            <div class="bar" id="barra1" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog 85%"></div>
-            <div class="bar" id="barra2" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
-            <div class="bar" id="barra3" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
-            <div class="bar" id="barra4" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
-            <div class="bar" id="barra5" style="--bar-value:35%;" data-name="Partido 5" title="YouTube 35%"></div>
-            <div class="bar" id="barra6" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
-            <div class="bar" id="barra7" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
-            <div class="bar" id="barra8" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
+            <div class="bar" id="barra1"  data-name="Partido 1" title="Your Blog 85%"></div>
+            <div class="bar" id="barra2"  data-name="Partido 2" title="Medium 23%"></div>
+            <div class="bar" id="barra3"  data-name="Partido 3" title="Tumblr 7%"></div>
+            <div class="bar" id="barra4" data-name="Partido 4" title="Facebook 38%"></div>
+            <div class="bar" id="barra5" data-name="Partido 5" title="YouTube 35%"></div>
+            <div class="bar" id="barra6" data-name="Partido 6" title="LinkedIn 30%"></div>
+            <div class="bar" id="barra7" data-name="Partido 7" title="Twitter 5%"></div>
+            <div class="bar" id="barra8" data-name="Otros" title="Other 20%"></div>
 
           </div>
         </div>
@@ -241,9 +248,9 @@
     <!--Pie de página-->
     <footer class="footer-page">
       <div class="grupo-img-footer">
-        <img class="img-footer" src="img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
-        <img class="img-footer" src="img/Logo_DINE_negativo.png" alt="">
-        <img class="img-footer" src="img/icons/logos_001-10.4430c8d5.png" alt="">
+        <img class="img-footer" src="../img/icons/Ministerio-del-Interior_pluma.1ab9a7a7.png" alt="">
+        <img class="img-footer" src="../img/Logo_DINE_negativo.png" alt="">
+        <img class="img-footer" src="../img/icons/logos_001-10.4430c8d5.png" alt="">
       </div>
       <div class="p-footer">
         <p>
@@ -251,7 +258,7 @@
           porcentajes de las agrupaciones políticas son calculados sobre los votos válidos (PASO) conforme al art. 
           45 Ley 26.571 y afirmativos (Generales). No se incluyen los votos correspondientes a los electores 
           residentes en el exterior ni privados de la libertad. Al usar este sitio usted acepta los 
-          <a href="terminos-condiciones.html">Términos y Condiciones</a>."
+          <a href="./terminos-condiciones.html">Términos y Condiciones</a>."
         </p>
       </div>
     </footer>
