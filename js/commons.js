@@ -3,12 +3,14 @@ const url = 'https://resultados.mininterior.gob.ar/api/'
 let selectFecha = document.getElementById('filtro-year');
 let selectCargo = document.getElementById('filtro-cargo');
 let selectDistrito = document.getElementById('filtro-distrito');
+let selectSeccion = document.getElementById('filtro-seccion');
 
 let anioEleccion;
 let tipoRecuento = "1";
 let tipoEleccion = "1";
 let cargoEleccion;
 let distritoEleccion;
+let seccionEleccion;
 
 async function periodos() {
     try {
@@ -63,6 +65,17 @@ selectDistrito.addEventListener('change', function() {
     cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
 });
 
+selectSeccion.addEventListener('change', function() {
+    
+    const anioEleccion = selectFecha.value;
+    const cargoEleccion = selectCargo.value;
+    const distritoEleccion = selectDistrito.value;
+    const seccionEleccion = selectSeccion.value;
+
+    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion)
+});
+
+
 let v = false;
 Filtrar()
 
@@ -95,6 +108,11 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                             distritoEleccion = selectDistrito.value
                             v = true;
                             
+                            let secciones = data[i].Cargos[j].Distrito.IdDistrito;
+
+                            //console.log(secciones);
+                            
+                            //for (let l = 0; l < secciones.length; l++) 
                         }
                     }
                 }
