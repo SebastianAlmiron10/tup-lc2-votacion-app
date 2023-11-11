@@ -2,12 +2,14 @@ let data;
 let selectFecha = document.getElementById('filtro-year');
 let selectCargo = document.getElementById('filtro-cargo');
 let selectDistrito = document.getElementById('filtro-distrito');
+let selectSeccion = document.getElementById('filtro-seccion');
 
 let anioEleccion;
 let tipoRecuento;
 let tipoEleccion;
 let cargoEleccion;
 let distritoEleccion;
+let seccionEleccion;
 
 async function periodos() {
     try {
@@ -62,8 +64,18 @@ selectDistrito.addEventListener('change', function() {
     cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
 });
 
+selectSeccion.addEventListener('change', function() {
+    
+    const anioEleccion = selectFecha.value;
+    const cargoEleccion = selectCargo.value;
+    const distritoEleccion = selectDistrito.value;
+    const seccionEleccion = selectSeccion.value;
 
-async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
+    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion)
+});
+
+
+async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null, seccionEleccion) {
     try {
         let response = await fetch(`https://resultados.mininterior.gob.ar/api/menu?año=${anioEleccion}`);
         let data = await response.json();
@@ -86,10 +98,20 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                         for (let k = 0; k < distritos.length; k++) {
                             
                             let optionDistrito = document.createElement('option');
-                            optionDistrito.value = distritos[k].Distrito;//TOODS LOS DISTRITOS
+                            optionDistrito.value = distritos[k].IdDistrito;//TOODS LOS DISTRITOS
                             optionDistrito.textContent = distritos[k].Distrito;
                             selectDistrito.appendChild(optionDistrito);
-                            distritoEleccion = selectDistrito.value
+                            distritoEleccion = selectDistrito.value;
+
+                            //let secciones = data[i].Cargos[j].Distrito.IdDistrito;
+                            //console.log(secciones);
+
+                            //for (let l = 0; l < secciones.length; l++) 
+
+                                
+
+
+                            
                             
                         }
                     }
