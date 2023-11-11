@@ -25,7 +25,6 @@ async function periodos() {
 }
 
 periodos();
-
 let anioSeleccionado = false;
 
 selectFecha.addEventListener('change', function() {
@@ -33,7 +32,7 @@ selectFecha.addEventListener('change', function() {
     selectCargo.innerHTML = '';
     selectDistrito.innerHTML = '';
     
-    const anioEleccion = selectFecha.value;
+    anioEleccion = selectFecha.value;
     anioSeleccionado = true;
 
     // 1 PASO - 2 Generales - 3 Ballotage
@@ -44,8 +43,8 @@ selectCargo.addEventListener('change', function() {
     // Borra las opciones anteriores de selectDistrito
     selectDistrito.innerHTML = '';
     
-    const anioEleccion = selectFecha.value;
-    const cargoEleccion = selectCargo.value;
+    anioEleccion = selectFecha.value;
+    cargoEleccion = selectCargo.value;
     
     // 1 PASO - 2 Generales - 3 Ballotage
     cargarOpciones(anioEleccion, 2, cargoEleccion);
@@ -54,14 +53,15 @@ selectCargo.addEventListener('change', function() {
 selectDistrito.addEventListener('change', function() {
     // Borra las opciones anteriores de selectDistrito
     
-    const anioEleccion = selectFecha.value;
-    const cargoEleccion = selectCargo.value;
-    const distritoEleccion = selectDistrito.value;
+    anioEleccion = selectFecha.value;
+    cargoEleccion = selectCargo.value;
+    distritoEleccion = selectDistrito.value;
     
     // 1 PASO - 2 Generales - 3 Ballotage
     cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
 });
 
+Filtrar()
 
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
     try {
@@ -75,8 +75,8 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                 for (let j = 0; j < data[i].Cargos.length; j++) {
                     
                     let optionCargo = document.createElement('option');
-                    optionCargo.value = data[i].Cargos[j].Cargo;
-                    optionCargo.textContent = data[i].Cargos[j].Cargo;
+                    optionCargo.innerText = data[i].Cargos[j].Cargo;
+                    optionCargo.value = data[i].Cargos[j].IdCargo;
                     selectCargo.appendChild(optionCargo);
                     
                     if (cargoEleccion && data[i].Cargos[j].Cargo === cargoEleccion) {
@@ -99,24 +99,24 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
     } catch (error) {
         console.error('Error en respuesta: ' + error);
     }
-    Resultados(anioEleccion, tipoRecuento, tipoEleccion, cargoEleccion, distritoEleccion)
 }
 
-async function Resultados(anioEleccion, tipoRecuento, tipoEleccion, cargoEleccion, distritoEleccion){
+
+async function Filtrar() {
     console.log(anioEleccion)
     console.log(distritoEleccion)
     console.log(cargoEleccion)
     console.log(tipoRecuento)
     console.log(tipoEleccion)
-    try{
-        const url =`https://resultados.mininterior.gob.ar/api/resultados/getResultados`+`?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}`+`&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}`
+    
+    try {
+        const url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}`
         
         let response = await fetch(url);
         let resultados = await response.json();
-
-
+        
         console.log(resultados)
-    }catch (error){
+    } catch (error) {
         console.error('Error en respuesta: ' + error);
     }
 }

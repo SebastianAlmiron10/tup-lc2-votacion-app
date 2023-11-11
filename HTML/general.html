@@ -49,7 +49,7 @@
           </li>
 
           <li class="filtros">
-            <button id="filtrar" name="filtrar"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000;"></i>FILTRAR</button>
+            <button type="button" id="filtrar" name="filtrar" onclick="Filtrar()"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000;"></i>FILTRAR</button>
           </li>
 
           <li>
@@ -116,6 +116,34 @@
 
           </div>
       </section>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12.5, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
       <section class="datos-politica">
 
         <div class="agrupacion-politica item">
@@ -227,7 +255,7 @@
 
           <div class="grid">
 
-            <div class="bar" id="barra1" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog 85%"></div>
+            <div class="bar" id="barra1" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog /5%"></div>
             <div class="bar" id="barra2" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
             <div class="bar" id="barra3" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
             <div class="bar" id="barra4" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
@@ -235,6 +263,8 @@
             <div class="bar" id="barra6" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
             <div class="bar" id="barra7" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
             <div class="bar" id="barra8" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
+
+            
 
           </div>
         </div>

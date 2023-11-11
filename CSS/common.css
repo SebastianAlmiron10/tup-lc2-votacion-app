@@ -334,3 +334,8 @@ h3 {
 .agregar-informe:hover{
   color: var(--textos);
 }
+
+#myChart {
+  width: 400px !important;
+  height: 400px !important;
+}
