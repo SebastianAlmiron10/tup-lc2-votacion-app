@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generales</title>
     <script src="../JS/pages/general.js"></script>
-    <script src="../JS//commons.js" defer></script>
+    <script src="../JS/commons.js" defer></script>
+
     <link rel="shortcut icon" type="image/png" href="../img/icons/favicon-16x16.png" />
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="../CSS/pages/generales.css">
     <link rel="stylesheet" href="../CSS/common.css" />
     <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
   </head>
   <body>
     <header>
@@ -41,9 +43,9 @@
           </li>
 
           <li class="filtros">
-            <select name="filtro-distrito" id="filtro-distrito">
+            <select name="filtro-distrito" id="filtro-distrito" required>
               <option value="" disable selected hidden>Distrito</option>
-              <option value="" >Seleccione un cargo</option>
+              <option value="" required>Seleccione un cargo</option>
               
             </select>
           </li>
@@ -51,7 +53,7 @@
           <li class="filtros">
             <select name="filtro-seccion" id="filtro-seccion">
               <option value="" disable selected hidden>Seccion</option>
-              <option value="" >Seleccione una Ciudad</option>
+              <option value="" id="button-seccion">Seleccione una Ciudad</option>
               
             </select>
           </li>
@@ -93,7 +95,7 @@
       </section>
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
-        <h1>Elecciones 2021 | Generales</h1>
+        <h1 id="titulo-combo">Elecciones | Generales</h1>
         <p class="texto-path">2020 > Generales > Provisorio > Senadores Nacionales > BuenosAires</p>
       </section>
       <section id="sec-contenido">
@@ -105,28 +107,28 @@
             <div class="info-mesas-individual" id="mesas-computadas">
               <img class="imagen-generales" src="../img/icons/urna.svg" alt="urna" width="70" height="70">
               <h4 class="h4-generales">Mesas computadas</h4>
-              <p class="p-generales">2,586</p>
+              <p class="p-generales" id="mesas-computadas-info"></p>
             </div>
 
             <div class="info-mesas-individual" id="electores">
               <img class="imagen-generales" src="../img/icons/electores.svg" alt="electores" width="70" height="70">
               <h4 class="h4-generales" id="posicion">Electores</h4>
-              <p class="p-generales">876,580</p>
+              <p class="p-generales" id="electores-info"></p>
             </div>
 
             <div class="info-mesas-individual" id="escrutados">
               <img class="imagen-generales" src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
               <h4 class="h4-generales">Participacion sobre escrutinios</h4>
-              <p class="p-generales">65,2%</p>
+              <p class="p-generales" id="escrutinios-info"></p>
               </div>
              
             </div>
 
           </div>
       </section>
-      <div>
+      <!--<div>
         <canvas id="myChart"></canvas>
-      </div>
+      </div>-->
       
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       
@@ -253,8 +255,8 @@
         </div>
 
         <div class="mapa item">
-          <div class="title"><h4>Buenos Aires</h4></div>
-          <div class="provin"><img src="../img/mapas/svgviewer-png-output1.png" alt="BUENOS AIRES" width="150" height="200"></div>
+          <div class="title" id="tittle-provincia"></div>
+          <div class="provin" id="mapas-img"></div>
         </div>
 
         <div class="chart-wrap horizontal resumen-votos item">

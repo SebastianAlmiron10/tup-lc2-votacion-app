@@ -429,3 +429,7 @@ progress {
     color: #333;
     font-size: 9px;
 }
+
+.mensaje-usuario{
+    display: none;
+  }

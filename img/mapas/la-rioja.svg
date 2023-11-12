@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="210" width="800"><path class="leaflet-interactive" stroke="#18a0fb"
-stroke-opacity="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-fill="#18a0fb" fill-opacity="1" fill-rule="evenodd" d="M153 60L145 60L142 57L142 54L138 
-55L130 51L131 48L129 44L116 45L111 54L107 56L106 60L104 60L108 63L110 62L119 75L120 
-78L118 81L118 93L133 95L150 111L150 113L159 122L162 127L162 144L169 151L169 153L173 
-156L191 153L191 130L197 116L199 106L192 84L190 84L190 82L184 75L177 74L178 70L175 
-68L173 59L163 57L161 58L160 61L155 61z"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="105" width="400" viewBox="0 0 400 105"><path class="leaflet-interactive" stroke="#18a0fb" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#18a0fb" fill-opacity="1" fill-rule="evenodd" d="M76.5 30h-4l-1.5 -1.5v-1.5l-2 0.5 -4 -2 0.5 -1.5 -1 -2 -6.5 0.5 -2.5 4.5 -2 1 -0.5 2h-1l2 1.5 1 -0.5 4.5 6.5 0.5 1.5 -1 1.5v6l7.5 1 8.5 8v1l4.5 4.5 1.5 2.5v8.5l3.5 3.5v1l2 1.5 9 -1.5v-11.5l3 -7 1 -5 -3.5 -11h-1v-1l-3 -3.5 -3.5 -0.5 0.5 -2 -1.5 -1 -1 -4.5 -5 -1 -1 0.5 -0.5 1.5h-2.5z"/></svg>

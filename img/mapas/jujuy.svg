@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="210" width="800"><path class="leaflet-interactive" stroke="#18a0fb"
-stroke-opacity="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-fill="#18a0fb" fill-opacity="1" fill-rule="evenodd" d="M190 115L182 102L183 91L173 
-87L171 77L172 73L170 70L168 70L168 65L170 59L173 57L173 49L175 48L175 45L149 46L142 
-38L136 37L137 35L129 30L127 31L128 34L125 45L109 52L105 52L103 62L94 67L91 67L92 73L84 
-81L93 90L83 124L92 133L92 137L96 137L101 144L104 144L105 147L109 149L117 150L117 
-148L120 147L122 144L121 143L123 139L123 126L120 117L123 108L132 111L139 116L137 131L139 
-138L146 140L150 145L155 158L161 163L162 161L164 163L168 163L169 165L175 163L180 168L187 
-170L189 170L190 165L192 164L199 170L201 170L205 164L217 160L222 151L221 115L213 115L209 
-121L199 113L195 113L193 115z"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="105" width="400" viewBox="0 0 400 105"><path class="leaflet-interactive" stroke="#18a0fb" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#18a0fb" fill-opacity="1" fill-rule="evenodd" d="m95 57.5 -4 -6.5 0.5 -5.5 -5 -2 -1 -5 0.5 -2 -1 -1.5h-1v-2.5l1 -3 1.5 -1v-4l1 -0.5v-1.5l-13 0.5 -3.5 -4 -3 -0.5 0.5 -1 -4 -2.5 -1 0.5 0.5 1.5 -1.5 5.5 -8 3.5h-2l-1 5 -4.5 2.5h-1.5l0.5 3 -4 4 4.5 4.5 -5 17 4.5 4.5v2h2l2.5 3.5h1.5l0.5 1.5 2 1 4 0.5v-1l1.5 -0.5 1 -1.5 -0.5 -0.5 1 -2v-6.5l-1.5 -4.5 1.5 -4.5 4.5 1.5 3.5 2.5 -1 7.5 1 3.5 3.5 1 2 2.5 2.5 6.5 3 2.5 0.5 -1 1 1h2l0.5 1 3 -1 2.5 2.5 3.5 1h1l0.5 -2.5 1 -0.5 3.5 3h1l2 -3 6 -2 2.5 -4.5 -0.5 -18h-4l-2 3 -5 -4h-2l-1 1z"/></svg>
