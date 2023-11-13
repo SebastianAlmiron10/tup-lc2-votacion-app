@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PASO</title>
     <script src="../general.js"></script>
+    <script src="../JS/commons.js" defer></script>
     <link rel="shortcut icon" type="image/png" href="../img/icons/favicon-16x16.png" />
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="../CSS/pages/generales.css">
@@ -28,38 +29,40 @@
           <li class="filtros">
             <select name="filtro-year" id="filtro-year" class="filtro">
               <option value="" disable selected hidden>Año</option>
-              <option value="">2023</option>
-              <option value="">2022</option>
-              <option value="">2021</option>
-              <option value="">2020</option>
             </select>
           </li>
 
           <li class="filtros">
             <select name="filtro-cargo" id="filtro-cargo" class="filtro">
               <option value="" disable selected hidden>Cargo</option>
-              <option value="">Presidente</option>
-              <option value="">Gobernado</option>
-              <option value="">Jefe de Gobierno</option>
-              <option value="">Senador</option>
+              <option value="" >Seleccione un año</option>
+              
             </select>
           </li>
 
           <li class="filtros">
-            <select name="filtro-distrito" id="filtro-distrito">
+            <select name="filtro-distrito" id="filtro-distrito" required>
               <option value="" disable selected hidden>Distrito</option>
-              <option value="">Capital</option>
-              <option value="">La Plata</option>
+              <option value="" required>Seleccione un cargo</option>
+              
             </select>
           </li>
 
           <li class="filtros">
-            <button id="filtrar" name="filtrar"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000;"></i>FILTRAR</button>
+            <select name="filtro-seccion" id="filtro-seccion">
+              <option value="" disable selected hidden>Seccion</option>
+              <option value="" id="button-seccion">Seleccione una Ciudad</option>
+              
+            </select>
+          </li>
+
+          <li class="filtros">
+            <button type="button" id="filtrar" name="filtrar" onclick="Filtrar()"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000;"></i>FILTRAR</button>
           </li>
 
           <li>
             <a href="./general.html" class="boton-menu botones-paso-generales" id="boton-generales">
-              Generales
+              GENERALES
             </a>
           </li>
 
@@ -69,7 +72,7 @@
             </a>
           </li>
 
-        <!-- <li><a href="contact">Contacto</a></li>-->
+          <!-- <li><a href="contact">Contacto</a></li>-->
         </ul>
         <ul>
           <li>
@@ -79,6 +82,7 @@
           </li>
         </ul>
       </div>
+      
     </header>
     <!-- Contenido principal de la página -->
     <main>
@@ -89,7 +93,7 @@
       </section>
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
-        <h1>Elecciones 2021 | Generales</h1>
+        <h1 id="titulo-combo">Elecciones | Generales</h1>
         <p class="texto-path">2020 > Generales > Provisorio > Senadores Nacionales > BuenosAires</p>
       </section>
       <section id="sec-contenido">
@@ -101,25 +105,53 @@
             <div class="info-mesas-individual" id="mesas-computadas">
               <img class="imagen-generales" src="../img/icons/urna.svg" alt="urna" width="70" height="70">
               <h4 class="h4-generales">Mesas computadas</h4>
-              <p class="p-generales">2,586</p>
+              <p class="p-generales" id="mesas-computadas-info"></p>
             </div>
 
             <div class="info-mesas-individual" id="electores">
               <img class="imagen-generales" src="../img/icons/electores.svg" alt="electores" width="70" height="70">
               <h4 class="h4-generales" id="posicion">Electores</h4>
-              <p class="p-generales">876,580</p>
+              <p class="p-generales" id="electores-info"></p>
             </div>
 
             <div class="info-mesas-individual" id="escrutados">
               <img class="imagen-generales" src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
               <h4 class="h4-generales">Participacion sobre escrutinios</h4>
-              <p class="p-generales">65,2%</p>
+              <p class="p-generales" id="escrutinios-info"></p>
               </div>
              
             </div>
 
           </div>
       </section>
+      <!--<div>
+        <canvas id="myChart"></canvas>
+      </div>-->
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12.5, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
       <section class="datos-politica">
 
         <div class="agrupacion-politica item">
@@ -221,24 +253,26 @@
         </div>
 
         <div class="mapa item">
-          <div class="title"><h4>Buenos Aires</h4></div>
-          <div class="provin"><img src="../img/mapas/svgviewer-png-output1.png" alt="BUENOS AIRES" width="150"></div>
+          <div class="title" id="tittle-provincia"></div>
+          <div class="provin" id="mapas-img"></div>
         </div>
 
         <div class="chart-wrap horizontal resumen-votos item">
 
           <div class="title"><h4>Resumenes de Votos</h4></div>
 
-          <div class="grid ">
+          <div class="grid">
 
-            <div class="bar" id="barra1"  data-name="Partido 1" title="Your Blog 85%"></div>
-            <div class="bar" id="barra2"  data-name="Partido 2" title="Medium 23%"></div>
-            <div class="bar" id="barra3"  data-name="Partido 3" title="Tumblr 7%"></div>
-            <div class="bar" id="barra4" data-name="Partido 4" title="Facebook 38%"></div>
-            <div class="bar" id="barra5" data-name="Partido 5" title="YouTube 35%"></div>
-            <div class="bar" id="barra6" data-name="Partido 6" title="LinkedIn 30%"></div>
-            <div class="bar" id="barra7" data-name="Partido 7" title="Twitter 5%"></div>
-            <div class="bar" id="barra8" data-name="Otros" title="Other 20%"></div>
+            <div class="bar" id="barra1" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog /5%"></div>
+            <div class="bar" id="barra2" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
+            <div class="bar" id="barra3" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
+            <div class="bar" id="barra4" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
+            <div class="bar" id="barra5" style="--bar-value:35%;" data-name="Partido 5" title="YouTube 35%"></div>
+            <div class="bar" id="barra6" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
+            <div class="bar" id="barra7" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
+            <div class="bar" id="barra8" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
+
+            
 
           </div>
         </div>

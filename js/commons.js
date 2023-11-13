@@ -15,6 +15,9 @@ let seccionEleccion;
 
 
 
+
+
+
 async function periodos() {
     try {
         let response = await fetch(`${url}menu/periodos`);
@@ -239,12 +242,6 @@ async function mostrarCuadros(color) {
 }
 
 
-function agregarInforme(){
-
-    let informe = [];
-
-
-}
 
 
 
