@@ -96,7 +96,7 @@
       <section id="sec-titulo">
         <!--Seccion para agregar una palicula favorita por codigo-->
         <h1 id="titulo-combo">Elecciones | Generales</h1>
-        <p class="texto-path">2020 > Generales > Provisorio > Senadores Nacionales > BuenosAires</p>
+        <p id="texto-path"></p>
       </section>
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
@@ -130,127 +130,43 @@
         <canvas id="myChart"></canvas>
       </div>-->
       
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
-          type: 'pie',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12.5, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      </script>
       <section class="datos-politica">
 
         <div class="agrupacion-politica item">
           <div class="title"><h4>Agrupaciones politicas</h4></div><br>
           <!--JUNTOS POR EL CAMBIO-->
-          <div class="barra-lateral">
-            <p>JUNTOS POR EL CAMBIO</p>            
-            <hr>
-            <div class="partidos-porcentaje">
-              <div class="partidos">
-                <p>JUNTOS</p>
-              </div>
-              <div class="porcentaje-votos">
-                <p>38%</p> 
-                <p>30000 votos</p>
-              </div>
-            </div>  
-            <div class="progress" style="background: rgba(252, 210, 0, 0.3);">
-              <div class="progress-bar" id="partido-juntos" style="width:75%; background: rgb(252, 210, 0);">
-                <span class="progress-bar-text">75%</span>
-              </div>
-            </div>
-            <div class="partidos-porcentaje" id="partido-pj">
-              <div class="partidos">
-                <p>PJ</p>
-              </div>
-              <div class="porcentaje-votos">
-                <p>20%</p> 
-                <p>12000 votos</p>
-              </div>
-            </div>
-            <div class="progress" style="background: rgba(252, 210, 0, 0.3);">
-              <div class="progress-bar" id="partido-juntos" style="width:15%; background: rgb(252, 210, 0);">
-                <span class="progress-bar-text">15%</span>
-              </div>
-            </div>
-            <!--ECO + VAMOS CORRIENTES-->
-            <div>
-              <p>ECO + VAMOS CORRIENTES</p>            
-              <hr>
-              <div class="partidos-porcentaje">
-                <div class="partidos">
-                  <p>ECO</p>
-                </div>
-               <div class="porcentaje-votos">
-                  <p>23%</p> 
-                  <p>44000 votos</p>
-                </div>
-              </div>  
-              <div class="progress" style="background: rgba(112, 76, 159, 0.5);">
-                <div class="progress-bar" id="partido-eco" style="width:15%; background: rgb(120, 85, 165);">
-                  <span class="progress-bar-text">15%</span>
-                </div>
-              </div>
-            </div>  
-            <!--Union por la Patria-->
-            <div>
+          <div id="barra-lateral"> <!--DIV PADRE PRINCIPAL-->
+            
+            
+            <!--COPIAR DE ACA-->
+            <div> <!--DIV PADRE-->
+              <p>ECO + VAMOS CORRIENTES</p> <!--P N1-->       
+              <hr> <!--HR N1--> 
+              
               <div>
-                <p>Union por la Patria</p>            
-              <hr>
-              <div class="partidos-porcentaje">
-                <div class="partidos">
-                  <p>PATRIA</p>
+                <br>
+                <div class="partidos-porcentaje"> <!--DIV N1--> 
+                  
+
+                  <div class="partidos"> <!--DIV N2--> 
+                    <p>ECO</p> <!--P N3-->
+                  </div>
+
+                  <div class="porcentaje-votos"> <!--DIV N2-->
+                    <p>23%</p> <!--P N3-->
+                    <p>44000 votos</p> <!--P N3-->
+                  </div>
+                </div>  
+
+                <div class="progress" style="background: rgba(112, 76, 159, 0.5);"> <!--DIV N1--> 
+                  <div class="progress-bar" id="partido-eco" style="width:15%; background: rgb(120, 85, 165);"> <!--DIV N2-->
+                    <span class="progress-bar-text">15%</span> <!--SPAN N3-->
+                  </div>
                 </div>
-                <div class="porcentaje-votos">
-                  <p>10%</p> 
-                  <p>10000 votos</p>
-                </div>
-              </div> 
               </div>
-              <div class="progress" style="background: rgba(171, 40, 40, 0.3);">
-                <div class="progress-bar" id="partido-eco" style="width:10%; background: rgb(171, 40, 40);">
-                  <span class="progress-bar-text">10%</span>
-                </div>
-              </div>
+
             </div>
-            <!--La Libertad Avanza -->
-            <div>
-              <div>
-                <p>La Libertad Avanza</p>            
-              <hr>
-              <div class="partidos-porcentaje">
-                <div class="partidos">
-                  <p>libertad avanza</p>
-                </div>
-                <div class="porcentaje-votos">
-                  <p>5%</p> 
-                  <p>5000 votos</p>
-                </div>
-              </div> 
-              </div>
-              <div class="progress" style="background: rgba(0, 169, 232, 0.3);">
-                <div class="progress-bar" id="partido-eco" style="width:5%; background: rgb(0, 169, 232);">
-                  <span class="progress-bar-text">5%</span>
-                </div>
-              </div>
-            </div>    
+
           </div>                    
         </div>
 
@@ -263,19 +179,7 @@
 
           <div class="title"><h4>Resumenes de Votos</h4></div>
 
-          <div class="grid">
-
-            <div class="bar" id="barra1" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog /5%"></div>
-            <div class="bar" id="barra2" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
-            <div class="bar" id="barra3" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
-            <div class="bar" id="barra4" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
-            <div class="bar" id="barra5" style="--bar-value:35%;" data-name="Partido 5" title="YouTube 35%"></div>
-            <div class="bar" id="barra6" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
-            <div class="bar" id="barra7" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
-            <div class="bar" id="barra8" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
-
-            
-
+          <div id="grid">
           </div>
         </div>
       </section>

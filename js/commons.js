@@ -14,10 +14,6 @@ let distritoEleccion;
 let seccionEleccion;
 
 
-
-
-
-
 async function periodos() {
     try {
         let response = await fetch(`${url}menu/periodos`);
@@ -176,6 +172,8 @@ async function Filtrar() {
 
                 let titulo = document.getElementById('titulo-combo');
                 titulo.innerHTML = `Elecciones ${anioEleccion} | Generales`;
+                let path = document.getElementById('texto-path');
+                path.innerHTML = `${anioEleccion} > GENERALES > ${textCargos[cargoEleccion]} > ${nameProvincias[distritoEleccion - 1].toUpperCase()}`
                 
                 let response = await fetch(`https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}&seccionId=${seccionEleccion}`);
                 let resultados = await response.json();
@@ -206,9 +204,143 @@ async function Filtrar() {
 
 
                 }
+
+                let grid = document.getElementById('grid');
+                let barraLateral = document.getElementById('barra-lateral')
+                barraLateral.textContent = ''
+                grid.innerHTML = ''
+                let contador = 0
+                let porsentajeOtros = 0
+
+                // ordenar resultados de mayor a menor
+                resultados.valoresTotalizadosPositivos.sort((a, b) => b.votosPorcentaje - a.votosPorcentaje);
+
+                resultados.valoresTotalizadosPositivos.forEach(agrupacion => {
+                    const componenteRojo = Math.floor(Math.random() * 256);
+                    const componenteVerde = Math.floor(Math.random() * 256);
+                    const componenteAzul = Math.floor(Math.random() * 256);
+                    const colorHexadecimal = `rgb(${componenteRojo},${componenteVerde},${componenteAzul})`;
+                    let elemento = document.createElement('div');
+                    elemento.classList.add('bar');
+                    elemento.style.backgroundColor = colorHexadecimal
+                    elemento.style.setProperty('--bar-value',agrupacion.votosPorcentaje + '%');
+                    elemento.dataset.name = agrupacion.nombreAgrupacion;
+                    elemento.title = agrupacion.votosPorcentaje + '%';
+                    grid.appendChild(elemento)
+                    contador += 1
+                    let hr = document.createElement('hr')
+                    let br = document.createElement('br')
+                    let divPadre = document.createElement('div')
+                    let pNombreN1 = document.createElement('p')
+                    pNombreN1.textContent = agrupacion.nombreAgrupacion
+                    divPadre.appendChild(pNombreN1)
+                    divPadre.appendChild(hr)
+
+                    if (agrupacion.listas != undefined) {
+                        agrupacion.listas.forEach( lista => {
+                            
+                            let divHijoMayor = document.createElement('div')
+                            divHijoMayor.appendChild(br)
+                            
+                            let divHijoPP = document.createElement('div')
+                            divHijoPP.classList.add('partidos-porcentaje')
+                            
+                            let divPartidos = document.createElement('div')
+                            divPartidos.classList.add('partidos')
+                            
+                            let nombreLista = document.createElement('p')
+                            nombreLista.textContent = lista.nombre
+                            divPartidos.appendChild(nombreLista)
+                            divHijoPP.appendChild(divPartidos)
+                            let divPVotos = document.createElement('div')
+                            divPVotos.classList.add('porcentaje-votos')
+                            
+                            let porsentajeLista = document.createElement('p')
+                            let p = Number((lista.votos * 100 / agrupacion.votos).toFixed(2))
+                            porsentajeLista.textContent = `${p}%`
+                            divPVotos.appendChild(porsentajeLista)
+                            
+                            let votosLista = document.createElement('p')
+                            votosLista.textContent = lista.votos
+                            divPVotos.appendChild(votosLista)
+                            divHijoPP.appendChild(divPVotos)
+                            
+                            divHijoMayor.appendChild(divHijoPP)
+                            
+                            let progress = document.createElement('div')
+                            progress.classList.add('progress')
+                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`
+                            
+                            let progressBar = document.createElement('div')
+                            progressBar.classList.add('progress-bar')
+                            progressBar.style.backgroundColor = colorHexadecimal
+                            progressBar.style.width = `${p}%`
+                            let progressText = document.createElement('span')
+                            progressText.classList.add('progress-bar-text')
+                            progressText.textContent = `${p}%`
+                            
+                            progressBar.appendChild(progressText)
+                            progress.appendChild(progressBar)
+                            
+                            divHijoMayor.appendChild(progress)
+                            divPadre.appendChild(divHijoMayor)
+
+                        });
+                    }else{
+                            let divHijoMayor = document.createElement('div')
+                            divHijoMayor.appendChild(br)
+                            
+                            let divHijoPP = document.createElement('div')
+                            divHijoPP.classList.add('partidos-porcentaje')
+                            
+                            let divPartidos = document.createElement('div')
+                            divPartidos.classList.add('partidos')
+                            
+                            let nombreLista = document.createElement('p')
+                            nombreLista.textContent = agrupacion.nombre
+                            divPartidos.appendChild(nombreLista)
+                            divHijoPP.appendChild(divPartidos)
+                            let divPVotos = document.createElement('div')
+                            divPVotos.classList.add('porcentaje-votos')
+                            
+                            let porsentajeLista = document.createElement('p')
+                            let p = Number((agrupacion.votos * 100 / agrupacion.votos).toFixed(2))
+                            porsentajeLista.textContent = `${p}%`
+                            divPVotos.appendChild(porsentajeLista)
+                            
+                            let votosLista = document.createElement('p')
+                            votosLista.textContent = agrupacion.votos
+                            divPVotos.appendChild(votosLista)
+                            divHijoPP.appendChild(divPVotos)
+                            
+                            divHijoMayor.appendChild(divHijoPP)
+                            
+                            let progress = document.createElement('div')
+                            progress.classList.add('progress')
+                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`
+                            
+                            let progressBar = document.createElement('div')
+                            progressBar.classList.add('progress-bar')
+                            progressBar.style.backgroundColor = colorHexadecimal
+                            progressBar.style.width = `${p}%`
+                            let progressText = document.createElement('span')
+                            progressText.classList.add('progress-bar-text')
+                            progressText.textContent = `${p}%`
+                            
+                            progressBar.appendChild(progressText)
+                            progress.appendChild(progressBar)
+                            
+                            divHijoMayor.appendChild(progress)
+                            divPadre.appendChild(divHijoMayor)
+                    }
+
+                    barraLateral.appendChild(divPadre)
+
+                });
+
                 
             }
-
+            
         } catch (error) {
             console.error('Error en respuesta: ' + error);
             if (error instanceof Response) {
@@ -270,7 +402,7 @@ const nameProvincias = [
     'mendoza',
     'misiones',
     'neuquen',
-    'rio-negro',
+    'rio negro',
     'salta',
     'san juan',
     'san luis',
@@ -305,5 +437,19 @@ const mapas = [
     '../img/mapas/santa-fe.png',
     '../img/mapas/santiago-del-estero.png',
     '../img/mapas/tucuman.png',
-    '../img/mapas/tierra-del-fuego.png',
+    '../img/mapas/tierra-del-fuego-antartida.png',
 ]; 
+
+const textCargos = [
+    'CARGOS',
+    'PRESIDENTE/A',
+    'SENADORES/AS NACIONALES',
+    'DIPUTADOS/AS NACIONALES',
+    'GOBERNADOR/A - JEFE/A DE GOBIERNO ',
+    'SENADORES/AS PROVINCIALES',
+    'DIPUTADOS/AS PROVINCIALES - DIPUTADOS/AS DE LA CIUDAD',
+    'INTENDENTE/A',
+    'PARLAMENTO MERCOSUR NACIONAL',
+    'PARLAMENTO MERCOSUR REGIONAL',
+    'CONCEJAL/A - MIEMBROS DE LA JUNTA',
+]
