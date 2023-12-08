@@ -1,10 +1,9 @@
 let tipoEleccion;
 let eleccion;
 let pgTexto;
+
 setTimeout(() => {
-    // Tu código aquí
     let pg = document.querySelector('.botones-paso-generales');
-    console.log(pg);  // Agrega este console.log para verificar el elemento
 
     pgTexto = pg ? (pg.textContent || pg.innerText).trim() : null;
     
