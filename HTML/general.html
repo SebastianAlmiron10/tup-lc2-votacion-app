@@ -37,7 +37,7 @@
           <li class="filtros">
             <select name="filtro-cargo" id="filtro-cargo" class="filtro">
               <option value="" disable selected hidden>Cargo</option>
-              <option value="" >Seleccione un año</option>
+              <option value="" disabled>Seleccione un año</option>
               
             </select>
           </li>
@@ -45,7 +45,7 @@
           <li class="filtros">
             <select name="filtro-distrito" id="filtro-distrito" required>
               <option value="" disable selected hidden>Distrito</option>
-              <option value="" required>Seleccione un cargo</option>
+              <option value="" required disabled>Seleccione un Cargo</option>
               
             </select>
           </li>
@@ -53,7 +53,7 @@
           <li class="filtros">
             <select name="filtro-seccion" id="filtro-seccion">
               <option value="" disable selected hidden>Seccion</option>
-              <option value="" id="button-seccion">Seleccione una Ciudad</option>
+              <option value="" id="button-seccion" disabled>Seleccione una Distrito</option>
               
             </select>
           </li>
@@ -63,7 +63,7 @@
           </li>
 
           <li>
-            <a href="./paso.html" class="boton-menu botones-paso-generales" id="boton-paso">
+            <a href="./paso.html" class="boton-menu botones-paso-generales" id="boton-paso" onclick="PASOS()">
               PASOS
             </a>
           </li>
@@ -98,6 +98,10 @@
         <h1 id="titulo-combo">Elecciones | Generales</h1>
         <p id="texto-path"></p>
       </section>
+      <div id="tapar">
+        <h4 id="FLD">FILTRE LOS DATOS</h4>
+        <img src="../img/Loading_2.gif" alt="GIF" id="gif">
+      </div>
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
         <button class="agregar-informe">+ Agregar a informe</button>
@@ -138,34 +142,8 @@
           <div id="barra-lateral"> <!--DIV PADRE PRINCIPAL-->
             
             
-            <!--COPIAR DE ACA-->
-            <div> <!--DIV PADRE-->
-              <p>ECO + VAMOS CORRIENTES</p> <!--P N1-->       
-              <hr> <!--HR N1--> 
-              
-              <div>
-                <br>
-                <div class="partidos-porcentaje"> <!--DIV N1--> 
-                  
+            <!--GRAFICOS-->
 
-                  <div class="partidos"> <!--DIV N2--> 
-                    <p>ECO</p> <!--P N3-->
-                  </div>
-
-                  <div class="porcentaje-votos"> <!--DIV N2-->
-                    <p>23%</p> <!--P N3-->
-                    <p>44000 votos</p> <!--P N3-->
-                  </div>
-                </div>  
-
-                <div class="progress" style="background: rgba(112, 76, 159, 0.5);"> <!--DIV N1--> 
-                  <div class="progress-bar" id="partido-eco" style="width:15%; background: rgb(120, 85, 165);"> <!--DIV N2-->
-                    <span class="progress-bar-text">15%</span> <!--SPAN N3-->
-                  </div>
-                </div>
-              </div>
-
-            </div>
 
           </div>                    
         </div>

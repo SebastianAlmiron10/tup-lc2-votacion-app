@@ -70,24 +70,24 @@
 }
 
 .imagen-generales {
-  grid-column: 1;
-  grid-row: 1 / span 2;
+    grid-column: 1;
+    grid-row: 1 / span 2;
 }
 
 .h4-generales {
-  grid-column: 2;
-  margin: 0;
-  color: #fff;
-  display: flex;
-  
-  align-items: center;
+    grid-column: 2;
+    margin: 0;
+    color: #fff;
+    display: flex;
+    
+    align-items: center;
 }
 
 .p-generales {
-  grid-column: 2;
-  grid-row: 2;
-  margin: 0;
-  color: #fff;
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    color: #fff;
 }
 .fa-solid {
     color: #fff;
@@ -391,4 +391,4 @@ progress {
 
 .mensaje-usuario{
     display: none;
-  }
+}

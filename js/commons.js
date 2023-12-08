@@ -1,3 +1,22 @@
+let tipoEleccion;
+let eleccion;
+let pgTexto;
+setTimeout(() => {
+    // Tu código aquí
+    let pg = document.querySelector('.botones-paso-generales');
+    console.log(pg);  // Agrega este console.log para verificar el elemento
+
+    pgTexto = pg ? (pg.textContent || pg.innerText).trim() : null;
+    
+    if (pgTexto === 'GENERALES') {
+        tipoEleccion = 1;
+        eleccion = 'PASOS'
+    } else if (pgTexto === 'PASOS') {
+        tipoEleccion = 2;
+        eleccion = 'GENERALES'
+    }
+    
+},2000);
 
 let data;
 const url = 'https://resultados.mininterior.gob.ar/api/'
@@ -5,29 +24,38 @@ let selectFecha = document.getElementById('filtro-year');
 let selectCargo = document.getElementById('filtro-cargo');
 let selectDistrito = document.getElementById('filtro-distrito');
 let selectSeccion = document.getElementById('filtro-seccion');
+let tapar = document.getElementById('tapar');
+let fld = document.getElementById('FLD');
+let gif = document.getElementById('gif');
+gif.style.display = 'none'
 
 let anioEleccion;
 let tipoRecuento = "1";
-let tipoEleccion = "1";
 let cargoEleccion;
 let distritoEleccion;
 let seccionEleccion;
+let textoSeccionEleccion;
+let textoDistritoEleccion;
+let textoCargoEleccion;
 
+let s;
 
 async function periodos() {
     try {
         let response = await fetch(`${url}menu/periodos`);
         data = await response.json();
-        let optionFecha;
-        for (let i = 0; i < data.length; i++) {
-            optionFecha = document.createElement('option');
-            optionFecha.textContent = data[i];
+        
+        // Reemplazar el bucle for con forEach
+        data.forEach(item => {
+            let optionFecha = document.createElement('option');
+            optionFecha.textContent = item;
             selectFecha.appendChild(optionFecha);
-        }
+        });
     } catch (error) {
         console.error('Error en respuesta: ' + error);
     }
 }
+
 let c = false;
 let z;
 let x;
@@ -36,132 +64,190 @@ let anioSeleccionado = false;
 
 selectFecha.addEventListener('change', function() {
     // Borra las opciones anteriores de selectCargo y selectDistrito
-    selectCargo.innerHTML = '<option disable selected hidden>Cargo</option>';
-    selectDistrito.innerHTML = '<option disable selected hidden>Distrito</option><option>Seleccione un cargo</option>';
-    selectSeccion.innerHTML = '<option disable selected hidden>Seccion</option><option>Seleccione un distrito</option>';
+    selectCargo.innerHTML = '<option disabled selected hidden>Cargo</option>';
+    selectDistrito.innerHTML = '<option disabled selected hidden>Distrito</option><option disabled>Seleccione un cargo</option>';
+    selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
     z = true;
     
     
     anioEleccion = selectFecha.value;
     anioSeleccionado = true;
-
+    
     // 1 PASO - 2 Generales - 3 Ballotage
     cargarOpciones(anioEleccion, 2);
 });
 
-selectCargo.addEventListener('change', function() {
-    // Borra las opciones anteriores de selectDistrito
-    selectDistrito.innerHTML = '<option disable selected hidden>Distrito</option>';
-    selectSeccion.innerHTML = '<option disable selected hidden>Seccion</option><option>Seleccione un distrito</option>';
+// Modificar el evento change de selectCargo
+selectCargo.addEventListener('change', async function() {
+    // Obtener la opción seleccionada
+    let selectedOption = selectCargo.options[selectCargo.selectedIndex];
+    
+    // Obtener el valor (ID) y el texto de la opción seleccionada
+    cargoEleccion = selectedOption.value;
+    textoCargoEleccion = selectedOption.textContent;
+    
+    // Utilizar las variables según sea necesario
+    console.log('ID del cargo seleccionado:', cargoEleccion);
+    console.log('Texto del cargo seleccionado:', textoCargoEleccion);
+    
+    // Borra las opciones anteriores de selectDistrito y selectSeccion
+    selectDistrito.innerHTML = '<option disabled selected hidden>Distrito</option>';
+    selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
     x = true;
     z = false;
     anioEleccion = selectFecha.value;
-    cargoEleccion = selectCargo.value;
-    cargarOpciones(anioEleccion, 2, cargoEleccion);
     
-    // 1 PASO - 2 Generales - 3 Ballotage
+    // Llamar a la función cargarOpciones con las variables actualizadas
+    await cargarOpciones(anioEleccion, 2, cargoEleccion);
+    
+    // Resto del código después de cargarOpciones (si es necesario)
 });
 
-selectDistrito.addEventListener('change', function() {
-    // Borra las opciones anteriores de selectDistrito
-    selectSeccion.innerHTML = '<option disable selected hidden>Seccion</option><option>Seleccione un distrito</option>';
+
+
+selectDistrito.addEventListener('change', async function() {
+    // Obtener la opción seleccionada
+    let selectedOption = selectDistrito.options[selectDistrito.selectedIndex];
     
-    x = false;
-    anioEleccion = selectFecha.value;
-    cargoEleccion = selectCargo.value;
-    distritoEleccion = selectDistrito.value;
+    // Obtener el valor (ID) y el texto de la opción seleccionada
+    distritoEleccion = selectedOption.value;
+    textoDistritoEleccion = selectedOption.textContent;
     
-    // 1 PASO - 2 Generales - 3 Ballotage
-    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
+    // Utilizar las variables según sea necesario
+    console.log('ID del distrito seleccionado:', distritoEleccion);
+    console.log('Texto del distrito seleccionado:', textoDistritoEleccion);
+    
+    // Limpiar las opciones anteriores de selectSeccion
+    selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
+    
+    // Llamar a la función cargarOpciones con las variables actualizadas
+    const anioEleccion = selectFecha.value;
+    const cargoEleccion = selectCargo.value;
+    
+    seccionEleccion = undefined
+    
+    // Esperar a que la función cargarOpciones termine antes de continuar
+    await cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
+    
+    // Resto del código después de cargarOpciones (si es necesario)
 });
+
+
 
 selectSeccion.addEventListener('change', function() {
+    // Obtener la opción seleccionada
+    let selectedOption = selectSeccion.options[selectSeccion.selectedIndex];
     
+    // Obtener el valor (ID) y el texto de la opción seleccionada
+    seccionEleccion = selectedOption.value;
+    textoSeccionEleccion = selectedOption.textContent;
+    
+    // Utilizar las variables según sea necesario
+    console.log('ID de la sección seleccionada:', seccionEleccion);
+    console.log('Texto de la sección seleccionada:', textoSeccionEleccion);
+
+    // Llamar a la función cargarOpciones con las variables actualizadas
     const anioEleccion = selectFecha.value;
     const cargoEleccion = selectCargo.value;
     const distritoEleccion = selectDistrito.value;
-    const seccionEleccion = selectSeccion.value;
-
-    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion)
+    
+    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion);
 });
 
-
 let v = false;
-Filtrar();
 
 
 
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
     try {
+        
+        console.log(pgTexto)
+        tapar.style.display = 'flex'
+        fld.style.display = 'block'
+        gif.style.display = 'none'
+        const seccionSeleccionada = selectSeccion.value;
+        
         let response = await fetch(`${url}menu?año=${anioEleccion}`);
         let data = await response.json();
-        for (let i = 0; i < data.length; i++) {
-
-            
-            if (data[i].Cargos && data[i].Cargos.length > 0 && data[i].IdEleccion === idEleccion) {
+        
+        selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option><option disabled>Seleccione un distrito</option>';
+        
+        
+        // Reemplazar el bucle for con forEach
+        data.forEach(item => {
+            if (item.Cargos && item.Cargos.length > 0 && item.IdEleccion === idEleccion) {
                 
-                for (let j = 0; j < data[i].Cargos.length; j++) {
-                    
-                    if(z == true){
+                // Reemplazar el bucle for con forEach
+                item.Cargos.forEach(cargo => {
+                    if (z == true) {
                         let optionCargo = document.createElement('option');
-                        optionCargo.innerText = data[i].Cargos[j].Cargo;
-                        optionCargo.value = data[i].Cargos[j].IdCargo;
+                        optionCargo.innerText = cargo.Cargo;
+                        optionCargo.value = cargo.IdCargo;
                         selectCargo.appendChild(optionCargo);
                     }
-                    if (cargoEleccion && data[i].Cargos[j].IdCargo === cargoEleccion) {
-                        
-                        const distritos = data[i].Cargos[j].Distritos; //JSON
-                        
-                        for (let k = 0; k < distritos.length; k++) {
-                            
-                            if(x == true){
+                    if (cargoEleccion && cargo.IdCargo === cargoEleccion) {
+
+                        const distritos = cargo.Distritos; //JSON
+
+                        // Reemplazar el bucle for con forEach
+                        distritos.forEach(distrito => {
+                            if (x == true) {
                                 let optionDistrito = document.createElement('option');
-                                optionDistrito.textContent = distritos[k].Distrito;//TOODS LOS DISTRITOS
-                                optionDistrito.value = distritos[k].IdDistrito;
+                                optionDistrito.textContent = distrito.Distrito; //TOODS LOS DISTRITOS
+                                optionDistrito.value = distrito.IdDistrito;
                                 selectDistrito.appendChild(optionDistrito);
-                                distritoEleccion = selectDistrito.value
+                                distritoEleccion = selectDistrito.value;
                             }
                             v = true;
-                            
-                            if (distritoEleccion && distritos[k].IdDistrito == distritoEleccion){
-                                const seccionesProvinciales = distritos[k].SeccionesProvinciales;
+
+                            if (distritoEleccion && distrito.IdDistrito == distritoEleccion) {
+                                const seccionesProvinciales = distrito.SeccionesProvinciales;
                                 if (seccionesProvinciales && seccionesProvinciales.length > 0) {
-                                    for (let l = 0; l < seccionesProvinciales.length; l++) {
-                                        const secciones = seccionesProvinciales[l].Secciones;
+
+                                    // Reemplazar el bucle for con forEach
+                                    seccionesProvinciales.forEach(seccionProvincial => {
+                                        const secciones = seccionProvincial.Secciones;
                                         if (secciones && secciones.length > 0) {
-                                            for (let m = 0; m < secciones.length; m++) {
+                                            selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>'
+                                            // Reemplazar el bucle for con forEach
+                                            secciones.forEach(seccion => {
                                                 let optionSeccion = document.createElement('option');
-                                                optionSeccion.textContent = secciones[m].Seccion || 'Sin especificar';
-                                                optionSeccion.value = secciones[m].IdSeccion || 'sin-id';
+                                                optionSeccion.textContent = seccion.Seccion || 'Sin especificar';
+                                                optionSeccion.value = seccion.IdSeccion || 'sin-id';
                                                 selectSeccion.appendChild(optionSeccion);
-                                                seccionEleccion = selectSeccion.value
-                                            }
+                                            });
                                         }
-                                        console.log('CORTA')
-                                    }
+                                        console.log('CORTA');
+                                    });
                                 }
                             }
-                        }
+                        });
                     }
-                }
+                });
             }
-        }
+        });
+        selectSeccion.value = seccionSeleccionada;
     } catch (error) {
         console.error('Error en respuesta: ' + error);
         if (error instanceof Response) {
-            console.error('Código de estado:', error.status);}
+            console.error('Código de estado:', error.status);
+        }
     }
 }
 
 
 async function Filtrar() {
     
-    let buttonSeccion = document.getElementById('filtro-seccion').value;
-    let buttonDistrito = document.getElementById('filtro-distrito').value;
-    let buttonCargo = document.getElementById('filtro-cargo').value;
-    
-    if (!((buttonSeccion == 'Seleccione una Ciudad' || buttonSeccion == 'Seccion') || (buttonDistrito == 'Seleccione un cargo' || buttonDistrito == 'Distrito') || (buttonCargo == 'Seleccione un año' || buttonCargo == 'Cargo'))){
+    if (!(anioEleccion == undefined || cargoEleccion == undefined || distritoEleccion == undefined || seccionEleccion == undefined)){
+        console.log(    'IF '   )
+        gif.style.display = 'block'
+        fld.style.display = 'none'
+        setTimeout(() => {
+            console.log(    'SETTIME'    )
+            tapar.style.display = 'none'
+        }, 1000)
         try {
+            console.log(    'TRY '   )
             if (v == true){
                 console.log(anioEleccion);
                 console.log(tipoRecuento);
@@ -171,9 +257,10 @@ async function Filtrar() {
                 console.log(seccionEleccion);
 
                 let titulo = document.getElementById('titulo-combo');
-                titulo.innerHTML = `Elecciones ${anioEleccion} | Generales`;
+                titulo.innerHTML = `Elecciones ${anioEleccion} | ${tipoEleccion == 2 ? eleccion.charAt(0).toUpperCase() + eleccion.slice(1).toLowerCase() : eleccion}`;
+                
                 let path = document.getElementById('texto-path');
-                path.innerHTML = `${anioEleccion} > GENERALES > ${textCargos[cargoEleccion]} > ${nameProvincias[distritoEleccion - 1].toUpperCase()}`
+                path.innerHTML = `${anioEleccion} > ${eleccion} > ${textoCargoEleccion} > ${textoDistritoEleccion.toUpperCase()} > ${textoSeccionEleccion.toUpperCase()}`
                 
                 let response = await fetch(`https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}&seccionId=${seccionEleccion}`);
                 let resultados = await response.json();
@@ -199,7 +286,7 @@ async function Filtrar() {
 
                 for (let a = 0; a < parseInt(distritoEleccion); a++){
 
-                    nombreProvincia.innerHTML = `<h4>${nameProvincias[a]}</h4>`
+                    nombreProvincia.innerHTML = `<h4>${textoDistritoEleccion}</h4>`
                     mapa.innerHTML = `<img src="${mapas[a]}" width="200" height="225">`;
 
 
@@ -210,7 +297,6 @@ async function Filtrar() {
                 barraLateral.textContent = ''
                 grid.innerHTML = ''
                 let contador = 0
-                let porsentajeOtros = 0
 
                 // ordenar resultados de mayor a menor
                 resultados.valoresTotalizadosPositivos.sort((a, b) => b.votosPorcentaje - a.votosPorcentaje);
@@ -340,6 +426,8 @@ async function Filtrar() {
 
                 
             }
+
+
             
         } catch (error) {
             console.error('Error en respuesta: ' + error);
@@ -350,7 +438,9 @@ async function Filtrar() {
         }
     }
     else{
+        console.log(    'ELSE '   )
         mostrarCuadros("verde");
+        tapar.style.display = 'flex'
     }
     
 }
@@ -370,48 +460,12 @@ async function mostrarCuadros(color) {
     document.getElementById(mensajeClass).style.display = "block";
 
     setTimeout(() => {
-        document.getElementById(mensajeClass).style.display = "none"}, "4000");
+        document.getElementById(mensajeClass).style.display = "none"}, "3000");
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-const nameProvincias = [
-    'c.a.b.a',
-    'buenos aires',
-    'catamarca',
-    'cordoba',
-    'corrientes',
-    'chaco',
-    'chubut',
-    'entre-rios',
-    'formosa',
-    'jujuy',
-    'la pampa',
-    'la rioja',
-    'mendoza',
-    'misiones',
-    'neuquen',
-    'rio negro',
-    'salta',
-    'san juan',
-    'san luis',
-    'santa cruz',
-    'santa fe',
-    'santiago del estero',
-    'tucuman',
-    'tierra del fuego',
-]; 
 
 const mapas = [
     '../img/mapas/caba.svg',
@@ -439,17 +493,3 @@ const mapas = [
     '../img/mapas/tucuman.png',
     '../img/mapas/tierra-del-fuego-antartida.png',
 ]; 
-
-const textCargos = [
-    'CARGOS',
-    'PRESIDENTE/A',
-    'SENADORES/AS NACIONALES',
-    'DIPUTADOS/AS NACIONALES',
-    'GOBERNADOR/A - JEFE/A DE GOBIERNO ',
-    'SENADORES/AS PROVINCIALES',
-    'DIPUTADOS/AS PROVINCIALES - DIPUTADOS/AS DE LA CIUDAD',
-    'INTENDENTE/A',
-    'PARLAMENTO MERCOSUR NACIONAL',
-    'PARLAMENTO MERCOSUR REGIONAL',
-    'CONCEJAL/A - MIEMBROS DE LA JUNTA',
-]
