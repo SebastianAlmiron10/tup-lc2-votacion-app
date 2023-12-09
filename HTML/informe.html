@@ -6,6 +6,7 @@
     <title>Informes</title>
     <link rel="shortcut icon" type="image/png" href="../img/icons/favicon-16x16.png"/>
     <!-- Estilos CSS -->
+    <script src="../JS/pages/informes.js" defer></script>
     <link rel="stylesheet" href="../CSS/pages/informes.css">
     <link rel="stylesheet" href="../CSS/common.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -56,7 +57,7 @@
       </section>
       <section id="sec-contenido">
         
-          <table class="tabla-elecciones">
+          <table class="tabla-elecciones" id="tabla-elecciones">
             <thead class="tabla-head">
               <tr>
                 <th>PROVINCIAS</th>
@@ -68,216 +69,8 @@
                 <th>DATOS POR AGRUPACION</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="tr-body">
-
-                <td class="td-eleccion">
-                  <div>
-                   <img src="../img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
-                  </div>  
-                </td>
-
-                <td  class="td-eleccion year-eleccion">
-                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
-                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
-                </td>
-
-                <td class="td-eleccion datos-generales">
-                  <div id="info-mesas-informe">
-
-                    <div class="info-mesas-individual-informe" id="mesas-computadas">
-                      <img src="../img/icons/urna.svg" alt="urna" width="50" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Mesas computadas</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="electores">
-                      <img src="../img/icons/electores.svg" alt="electores" width="60" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Electores</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="escrutados">
-                      <img src="../img/icons/part-escrutado.svg" alt="escrutinios" width="60" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
-                      <p class="p-informe">62,71%</p>
-                    </div>
-        
-                  </div>
-                </td>
-
-                <td class="td-eleccion datos-agrupacion">
-                  <table class="tabla-agrupacion">
-                    <tbody>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-
-              </tr>
-
-              <tr class="tr-body">
-
-                <td class="td-eleccion">
-                  <div>
-                   <img src="../img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
-                  </div>  
-                </td>
-
-                <td  class="td-eleccion year-eleccion">
-                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
-                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
-                </td>
-
-                <td class="td-eleccion datos-generales">
-                  <div id="info-mesas-informe">
-
-                    <div class="info-mesas-individual-informe" id="mesas-computadas">
-                      <img src="../img/icons/urna.svg" alt="urna" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Mesas computadas</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="electores">
-                      <img src="../img/icons/electores.svg" alt="electores" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Electores</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="escrutados">
-                      <img src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
-                      <p class="p-informe">62,71%</p>
-                    </div>
-        
-                  </div>
-                </td>
-
-                <td class="td-eleccion datos-agrupacion">
-                  <table >
-                    <tbody>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-
-              </tr>
-
-              <tr class="tr-body">
-
-                <td class="td-eleccion">
-                  <div>
-                   <img src="../img/mapas/svgviewer-png-output1.png" alt="Mapa Buenos Aires" class="imagen-mapa-informe">
-                  </div>  
-                </td>
-
-                <td  class="td-eleccion year-eleccion">
-                  <p class="texto-elecciones-chico">Elecciones 2020 | Generales</p>
-                  <p class="texto-path-chico">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
-                </td>
-
-                <td class="td-eleccion datos-generales">
-                  <div id="info-mesas-informe">
-
-                    <div class="info-mesas-individual-informe" id="mesas-computadas">
-                      <img src="../img/icons/urna.svg" alt="urna" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Mesas computadas</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="electores">
-                      <img src="../img/icons/electores.svg" alt="electores" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Electores</h4>
-                      <p class="p-informe">62.71%</p>
-                    </div>
-        
-                    <div class="info-mesas-individual-informe" id="escrutados">
-                      <img src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70" class="imagen-informe">
-                      <h4 class="h4-informe">Participacion sobre escrutinios</h4>
-                      <p class="p-informe">62,71%</p>
-                    </div>
-        
-                  </div>
-                </td>
-
-                <td class="td-eleccion datos-agrupacion">
-                  <table >
-                    <tbody>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                      <tr class="tabla-agrupacion">
-                        <td class="grupo">
-                          <h5>Juntos</h5>
-                        </td>
-                        <td class="numeros">
-                          <p>30%</p>
-                          <p>3.000.000 votos</p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-
-              </tr>
+            <tbody id="cuerpo-agrupaciones">
+              
             </tbody>
           </table>
         

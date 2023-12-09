@@ -1,4 +1,3 @@
-
 let data;
 const url = 'https://resultados.mininterior.gob.ar/api/'
 let selectFecha = document.getElementById('filtro-year');
@@ -13,6 +12,7 @@ let cargoEleccion;
 let distritoEleccion;
 let seccionEleccion;
 
+let filtrarConteo = 0;
 
 
 
@@ -86,13 +86,14 @@ selectSeccion.addEventListener('change', function() {
     const distritoEleccion = selectDistrito.value;
     const seccionEleccion = selectSeccion.value;
 
+
     cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion)
 });
 
 
 let v = false;
 Filtrar();
-
+filtrarConteo = 1;
 
 
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
@@ -104,6 +105,8 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
             
             if (data[i].Cargos && data[i].Cargos.length > 0 && data[i].IdEleccion === idEleccion) {
                 
+
+                // BORRAR CAMBIO POR FOR EACH TODOS
                 for (let j = 0; j < data[i].Cargos.length; j++) {
                     
                     if(z == true){
@@ -120,10 +123,10 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                             
                             if(x == true){
                                 let optionDistrito = document.createElement('option');
-                                optionDistrito.textContent = distritos[k].Distrito;//TOODS LOS DISTRITOS
+                                optionDistrito.textContent = distritos[k].Distrito;//TODOS LOS DISTRITOS
                                 optionDistrito.value = distritos[k].IdDistrito;
                                 selectDistrito.appendChild(optionDistrito);
-                                distritoEleccion = selectDistrito.value
+                                distritoEleccion = selectDistrito.value;
                             }
                             v = true;
                             
@@ -131,17 +134,18 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                                 const seccionesProvinciales = distritos[k].SeccionesProvinciales;
                                 if (seccionesProvinciales && seccionesProvinciales.length > 0) {
                                     for (let l = 0; l < seccionesProvinciales.length; l++) {
+                                        let nombreSeccion;
                                         const secciones = seccionesProvinciales[l].Secciones;
                                         if (secciones && secciones.length > 0) {
+                                            
                                             for (let m = 0; m < secciones.length; m++) {
                                                 let optionSeccion = document.createElement('option');
                                                 optionSeccion.textContent = secciones[m].Seccion || 'Sin especificar';
                                                 optionSeccion.value = secciones[m].IdSeccion || 'sin-id';
                                                 selectSeccion.appendChild(optionSeccion);
-                                                seccionEleccion = selectSeccion.value
-                                            }
+                                                seccionEleccion = selectSeccion.value;
+                                            }   
                                         }
-                                        console.log('CORTA')
                                     }
                                 }
                             }
@@ -160,11 +164,14 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
 
 async function Filtrar() {
     
+    let buttonAnio = document.getElementById('filtro-year').value;
+    let buttonCargo = document.getElementById('filtro-cargo').value;
     let buttonSeccion = document.getElementById('filtro-seccion').value;
     let buttonDistrito = document.getElementById('filtro-distrito').value;
-    let buttonCargo = document.getElementById('filtro-cargo').value;
     
-    if (!((buttonSeccion == 'Seleccione una Ciudad' || buttonSeccion == 'Seccion') || (buttonDistrito == 'Seleccione un cargo' || buttonDistrito == 'Distrito') || (buttonCargo == 'Seleccione un año' || buttonCargo == 'Cargo'))){
+    
+    // CAMBIAR IF a UNDEFINED
+    if (!((buttonAnio ==  'Año') || (buttonSeccion == 'Seleccione una Ciudad' || buttonSeccion == 'Seccion') || (buttonDistrito == 'Seleccione un cargo' || buttonDistrito == 'Distrito') || (buttonCargo == 'Seleccione un año' || buttonCargo == 'Cargo'))){
         try {
             if (v == true){
                 console.log(anioEleccion);
@@ -198,14 +205,15 @@ async function Filtrar() {
             
                 let nombreProvincia = document.getElementById('tittle-provincia');
                 
-
+                //BORRAR UNION
                 for (let a = 0; a < parseInt(distritoEleccion); a++){
 
                     nombreProvincia.innerHTML = `<h4>${nameProvincias[a]}</h4>`
                     mapa.innerHTML = `<img src="${mapas[a]}" width="200" height="225">`;
-
-
                 }
+
+                mostrarCuadros("verde");
+                document.getElementById("msj-verde").innerHTML = '<i class="fa-solid fa-thumbs-up iconos"></i>Datos Cargados Exitosamente';
                 
             }
 
@@ -217,8 +225,9 @@ async function Filtrar() {
             }
         }
     }
-    else{
-        mostrarCuadros("verde");
+    else if (filtrarConteo != 0){
+        mostrarCuadros("rojo"); 
+        document.getElementById("msj-rojo").innerHTML = '<i class="fa-solid fa-triangle-exclamation iconos"></i>Seleccione Todas las Opciones';
     }
     
 }
@@ -228,14 +237,16 @@ async function mostrarCuadros(color) {
     switch(color){
         case "rojo":
             mensajeClass = "msj-rojo";
+            break;
         case "verde":
             mensajeClass = "msj-verde";
-
+            break;
         default:
             mensajeClass = "msj-amarillo";
 
     }
     document.getElementById(mensajeClass).style.display = "block";
+    
 
     setTimeout(() => {
         document.getElementById(mensajeClass).style.display = "none"}, "4000");
@@ -244,7 +255,52 @@ async function mostrarCuadros(color) {
 
 
 
+let listaDatos = [];
 
+async function agregarInforme(){
+    let response = await fetch(`https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}&seccionId=${seccionEleccion}`);
+    let resultados = await response.json();
+
+    
+
+    //data[i].Cargos[j].Distritos;
+    
+    let listaTemporal = [anioEleccion, tipoRecuento, tipoEleccion, cargoEleccion, distritoEleccion, seccionEleccion, resultados.estadoRecuento.mesasTotalizadas, resultados.estadoRecuento.cantidadElectores, resultados.estadoRecuento.participacionPorcentaje + '%', resultados];
+    let flag = true;
+
+    console.log(listaTemporal[9].estadoRecuento);
+    
+    
+
+    listaDatos.forEach(function(elemento){
+        let cantRepetidos = 0;
+        listaTemporal.forEach(function(elemento2){
+            if (elemento.includes(elemento2)){
+                cantRepetidos += 1;
+            }
+            if (cantRepetidos == 9){
+                mostrarCuadros("amarillo");
+                document.getElementById("msj-amarillo").innerHTML = '<i class="fa-solid fa-exclamation iconos"></i>El informe que desea Agregar ya Existe';
+                flag = false;
+                return;
+            }
+        });
+    });
+
+    if (flag == true || listaDatos == []){
+        listaDatos.push(listaTemporal);
+        mostrarCuadros("verde");
+        document.getElementById("msj-verde").innerHTML = '<i class="fa-solid fa-thumbs-up iconos"></i>Informe Agregado Correctamente';
+    }
+    
+    
+    // Convierte el arreglo a una cadena de texto usando JSON.stringify
+    let listaTemporalTXT = JSON.stringify(listaDatos);
+
+    // Guarda la cadena de texto en localStorage con una clave específica
+    sessionStorage.setItem("INFORMES", listaTemporalTXT);
+
+}
 
 
 
