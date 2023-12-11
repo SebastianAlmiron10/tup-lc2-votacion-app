@@ -28,7 +28,7 @@ function agregarHTML(){
             </td>
             <td  class="td-eleccion year-eleccion">
                 <p class="texto-elecciones-chico">Elecciones ${elemento[0]} | Generales</p>
-                <p class="texto-path-chico">${elemento[0]} > ${elemento[1] == 1 ? 'PASO' : 'Generales' } > Provisorio > ${cargosPoliticos[elemento[3] - 1]} > ${nameProvincias[elemento[4] - 1]}</p>
+                <p class="texto-path-chico">${elemento[0]} > ${elemento[2] == 1 ? 'PASO' : 'Generales' } > Provisorio > ${cargosPoliticos[elemento[3] - 1]} > ${nameProvincias[elemento[4] - 1]}</p>
             </td>
             
             <td class="td-eleccion datos-generales">

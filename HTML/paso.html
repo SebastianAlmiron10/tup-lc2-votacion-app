@@ -69,7 +69,7 @@
           </li>
 
           <li>
-            <a  href="./informe.html"  class="boton-menu" id="boton-informe" onclick="agregarInforme()">
+            <a  href="./informe.html"  class="boton-menu" id="boton-informe">
               INFORMES
             </a>
           </li>
@@ -104,31 +104,31 @@
       </div>
       <section id="sec-contenido">
         <!--Seccion para contenido de la página-->
-        <button class="agregar-informe">+ Agregar a informe</button>
+        <button class="agregar-informe" onclick="agregarInforme()" >+ Agregar a informe</button>
 
-          <div id="info-mesas">
+        <div id="info-mesas">
 
-            <div class="info-mesas-individual" id="mesas-computadas">
-              <img class="imagen-generales" src="../img/icons/urna.svg" alt="urna" width="70" height="70">
-              <h4 class="h4-generales">Mesas computadas</h4>
-              <p class="p-generales" id="mesas-computadas-info"></p>
-            </div>
-
-            <div class="info-mesas-individual" id="electores">
-              <img class="imagen-generales" src="../img/icons/electores.svg" alt="electores" width="70" height="70">
-              <h4 class="h4-generales" id="posicion">Electores</h4>
-              <p class="p-generales" id="electores-info"></p>
-            </div>
-
-            <div class="info-mesas-individual" id="escrutados">
-              <img class="imagen-generales" src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
-              <h4 class="h4-generales">Participacion sobre escrutinios</h4>
-              <p class="p-generales" id="escrutinios-info"></p>
-              </div>
-             
-            </div>
-
+          <div class="info-mesas-individual" id="mesas-computadas">
+            <img class="imagen-generales" src="../img/icons/urna.svg" alt="urna" width="70" height="70">
+            <h4 class="h4-generales">Mesas computadas</h4>
+            <p class="p-generales" id="mesas-computadas-info"></p>
           </div>
+
+          <div class="info-mesas-individual" id="electores">
+            <img class="imagen-generales" src="../img/icons/electores.svg" alt="electores" width="70" height="70">
+            <h4 class="h4-generales" id="posicion">Electores</h4>
+            <p class="p-generales" id="electores-info"></p>
+          </div>
+
+          <div class="info-mesas-individual" id="escrutados">
+            <img class="imagen-generales" src="../img/icons/part-escrutado.svg" alt="escrutinios" width="70" height="70">
+            <h4 class="h4-generales">Participacion sobre escrutinios</h4>
+            <p class="p-generales" id="escrutinios-info"></p>
+            </div>
+            
+          </div>
+
+        </div>
       </section>
       <!--<div>
         <canvas id="myChart"></canvas>
