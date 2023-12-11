@@ -29,10 +29,11 @@
 .td-eleccion{
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid var(--titulo-Grilla);
-    padding: 15px 0;
+    padding: 20px 0;
     font-size: 12px;
     text-align: center;
     vertical-align: top;
+    padding-left: 5px;
 }
 
 .texto-elecciones-chico {
@@ -109,11 +110,23 @@
     width: 250px;
 }
 
-
 .datos-agrupacion table{
     height: 200px;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: 100%;
+}
+
+table::-webkit-scrollbar {
+    width: 12px; /* Ancho del scrollbar */
+}
+  
+table::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Color del "thumb" (barra deslizante) */
+    border-radius: 6px; /* Bordes redondeados */
+}
+  
+table::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color de fondo del scrollbar */
 }
 
 .tabla-agrupacion h5, .tabla-agrupacion p{
@@ -129,7 +142,6 @@
 }
 
 .numeros p{
-    
     font-size: 10px;
 }
 
@@ -166,3 +178,12 @@
     font-size: 20px;
 
 }
+
+.mensaje-usuario{
+    display: none;
+}
+
+.tabla-agrupacion p{
+    color: #000000;
+}
+

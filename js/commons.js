@@ -37,6 +37,12 @@ let textoSeccionEleccion;
 let textoDistritoEleccion;
 let textoCargoEleccion;
 
+let filtrarConteo = 0;
+
+
+
+
+
 async function periodos() {
     try {
         let response = await fetch(`${url}menu/periodos`);
@@ -67,6 +73,10 @@ selectFecha.addEventListener('change', function() {
      
     anioEleccion = selectFecha.value;
     anioSeleccionado = true;
+
+    distritoEleccion = undefined
+    seccionEleccion = undefined
+    cargoEleccion = undefined
     
     // 1 PASO - 2 Generales - 3 Ballotage
     cargarOpciones(anioEleccion, 2);
@@ -77,6 +87,8 @@ selectCargo.addEventListener('change', async function() {
     // Obtener la opción seleccionada
     let selectedOption = selectCargo.options[selectCargo.selectedIndex];
     
+    distritoEleccion = undefined
+
     // Obtener el valor (ID) y el texto de la opción seleccionada
     cargoEleccion = selectedOption.value;
     textoCargoEleccion = selectedOption.textContent;
@@ -137,7 +149,7 @@ selectSeccion.addEventListener('change', function() {
 });
 
 let v = false;
-
+filtrarConteo = 1;
 
 
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
@@ -399,8 +411,9 @@ async function Filtrar() {
             }
         }
     }
-    else{
-        mostrarCuadros("amarillo");
+    else if (filtrarConteo != 0){
+        mostrarCuadros("rojo"); 
+        document.getElementById("msj-rojo").innerHTML = '<i class="fa-solid fa-triangle-exclamation iconos"></i>Seleccione Todas las Opciones';
         tapar.style.display = 'flex'
     }
     
@@ -420,6 +433,7 @@ async function mostrarCuadros(color) {
 
     }
     document.getElementById(mensajeClass).style.display = "block";
+    
 
     setTimeout(() => {
         document.getElementById(mensajeClass).style.display = "none"}, "3000");
@@ -427,6 +441,53 @@ async function mostrarCuadros(color) {
 
 
 
+
+let listaDatos = [];
+
+async function agregarInforme(){
+    let response = await fetch(`https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}&seccionId=${seccionEleccion}`);
+    let resultados = await response.json();
+
+    
+
+    //data[i].Cargos[j].Distritos;
+    
+    let listaTemporal = [anioEleccion, tipoRecuento, tipoEleccion, cargoEleccion, distritoEleccion, seccionEleccion, resultados.estadoRecuento.mesasTotalizadas, resultados.estadoRecuento.cantidadElectores, resultados.estadoRecuento.participacionPorcentaje + '%', resultados];
+    let flag = true;
+
+    console.log(listaTemporal[9].estadoRecuento);
+    
+    
+
+    listaDatos.forEach(function(elemento){
+        let cantRepetidos = 0;
+        listaTemporal.forEach(function(elemento2){
+            if (elemento.includes(elemento2)){
+                cantRepetidos += 1;
+            }
+            if (cantRepetidos == 9){
+                mostrarCuadros("amarillo");
+                document.getElementById("msj-amarillo").innerHTML = '<i class="fa-solid fa-exclamation iconos"></i>El informe que desea Agregar ya Existe';
+                flag = false;
+                return;
+            }
+        });
+    });
+
+    if (flag == true || listaDatos == []){
+        listaDatos.push(listaTemporal);
+        mostrarCuadros("verde");
+        document.getElementById("msj-verde").innerHTML = '<i class="fa-solid fa-thumbs-up iconos"></i>Informe Agregado Correctamente';
+    }
+    
+    
+    // Convierte el arreglo a una cadena de texto usando JSON.stringify
+    let listaTemporalTXT = JSON.stringify(listaDatos);
+
+    // Guarda la cadena de texto en localStorage con una clave específica
+    sessionStorage.setItem("INFORMES", listaTemporalTXT);
+
+}
 
 
 const mapas = [
