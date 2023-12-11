@@ -29,7 +29,7 @@ let gif = document.getElementById('gif');
 gif.style.display = 'none'
 
 let anioEleccion;
-let tipoRecuento = "1";
+let tipoRecuento = 1;
 let cargoEleccion;
 let distritoEleccion;
 let seccionEleccion;
@@ -37,14 +37,11 @@ let textoSeccionEleccion;
 let textoDistritoEleccion;
 let textoCargoEleccion;
 
-let s;
-
 async function periodos() {
     try {
         let response = await fetch(`${url}menu/periodos`);
         data = await response.json();
         
-        // Reemplazar el bucle for con forEach
         data.forEach(item => {
             let optionFecha = document.createElement('option');
             optionFecha.textContent = item;
@@ -67,8 +64,7 @@ selectFecha.addEventListener('change', function() {
     selectDistrito.innerHTML = '<option disabled selected hidden>Distrito</option><option disabled>Seleccione un cargo</option>';
     selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
     z = true;
-    
-    
+     
     anioEleccion = selectFecha.value;
     anioSeleccionado = true;
     
@@ -84,10 +80,6 @@ selectCargo.addEventListener('change', async function() {
     // Obtener el valor (ID) y el texto de la opción seleccionada
     cargoEleccion = selectedOption.value;
     textoCargoEleccion = selectedOption.textContent;
-    
-    // Utilizar las variables según sea necesario
-    console.log('ID del cargo seleccionado:', cargoEleccion);
-    console.log('Texto del cargo seleccionado:', textoCargoEleccion);
     
     // Borra las opciones anteriores de selectDistrito y selectSeccion
     selectDistrito.innerHTML = '<option disabled selected hidden>Distrito</option>';
@@ -105,16 +97,13 @@ selectCargo.addEventListener('change', async function() {
 
 
 selectDistrito.addEventListener('change', async function() {
+    x = false
     // Obtener la opción seleccionada
     let selectedOption = selectDistrito.options[selectDistrito.selectedIndex];
     
     // Obtener el valor (ID) y el texto de la opción seleccionada
     distritoEleccion = selectedOption.value;
     textoDistritoEleccion = selectedOption.textContent;
-    
-    // Utilizar las variables según sea necesario
-    console.log('ID del distrito seleccionado:', distritoEleccion);
-    console.log('Texto del distrito seleccionado:', textoDistritoEleccion);
     
     // Limpiar las opciones anteriores de selectSeccion
     selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
@@ -128,8 +117,8 @@ selectDistrito.addEventListener('change', async function() {
     // Esperar a que la función cargarOpciones termine antes de continuar
     await cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion);
     
-    // Resto del código después de cargarOpciones (si es necesario)
 });
+
 
 
 
@@ -140,17 +129,11 @@ selectSeccion.addEventListener('change', function() {
     // Obtener el valor (ID) y el texto de la opción seleccionada
     seccionEleccion = selectedOption.value;
     textoSeccionEleccion = selectedOption.textContent;
-    
-    // Utilizar las variables según sea necesario
-    console.log('ID de la sección seleccionada:', seccionEleccion);
-    console.log('Texto de la sección seleccionada:', textoSeccionEleccion);
 
-    // Llamar a la función cargarOpciones con las variables actualizadas
-    const anioEleccion = selectFecha.value;
-    const cargoEleccion = selectCargo.value;
-    const distritoEleccion = selectDistrito.value;
-    
-    cargarOpciones(anioEleccion, 2, cargoEleccion, distritoEleccion, seccionEleccion);
+    tapar.style.display = 'flex'
+    fld.style.display = 'block'
+    gif.style.display = 'none'
+
 });
 
 let v = false;
@@ -160,7 +143,6 @@ let v = false;
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
     try {
         
-        console.log(pgTexto)
         tapar.style.display = 'flex'
         fld.style.display = 'block'
         gif.style.display = 'none'
@@ -172,11 +154,9 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
         selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option><option disabled>Seleccione un distrito</option>';
         
         
-        // Reemplazar el bucle for con forEach
         data.forEach(item => {
             if (item.Cargos && item.Cargos.length > 0 && item.IdEleccion === idEleccion) {
                 
-                // Reemplazar el bucle for con forEach
                 item.Cargos.forEach(cargo => {
                     if (z == true) {
                         let optionCargo = document.createElement('option');
@@ -188,7 +168,6 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
 
                         const distritos = cargo.Distritos; //JSON
 
-                        // Reemplazar el bucle for con forEach
                         distritos.forEach(distrito => {
                             if (x == true) {
                                 let optionDistrito = document.createElement('option');
@@ -203,12 +182,10 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                                 const seccionesProvinciales = distrito.SeccionesProvinciales;
                                 if (seccionesProvinciales && seccionesProvinciales.length > 0) {
 
-                                    // Reemplazar el bucle for con forEach
                                     seccionesProvinciales.forEach(seccionProvincial => {
                                         const secciones = seccionProvincial.Secciones;
                                         if (secciones && secciones.length > 0) {
                                             selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>'
-                                            // Reemplazar el bucle for con forEach
                                             secciones.forEach(seccion => {
                                                 let optionSeccion = document.createElement('option');
                                                 optionSeccion.textContent = seccion.Seccion || 'Sin especificar';
@@ -216,7 +193,6 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                                                 selectSeccion.appendChild(optionSeccion);
                                             });
                                         }
-                                        console.log('CORTA');
                                     });
                                 }
                             }
@@ -225,7 +201,6 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                 });
             }
         });
-        selectSeccion.value = seccionSeleccionada;
     } catch (error) {
         console.error('Error en respuesta: ' + error);
         if (error instanceof Response) {
@@ -248,12 +223,6 @@ async function Filtrar() {
         try {
             console.log(    'TRY '   )
             if (v == true){
-                console.log(anioEleccion);
-                console.log(tipoRecuento);
-                console.log(tipoEleccion);
-                console.log(cargoEleccion);
-                console.log(distritoEleccion);
-                console.log(seccionEleccion);
 
                 let titulo = document.getElementById('titulo-combo');
                 titulo.innerHTML = `Elecciones ${anioEleccion} | ${tipoEleccion == 2 ? eleccion.charAt(0).toUpperCase() + eleccion.slice(1).toLowerCase() : eleccion}`;
@@ -282,14 +251,8 @@ async function Filtrar() {
             
                 let nombreProvincia = document.getElementById('tittle-provincia');
                 
-
-                for (let a = 0; a < parseInt(distritoEleccion); a++){
-
-                    nombreProvincia.innerHTML = `<h4>${textoDistritoEleccion}</h4>`
-                    mapa.innerHTML = `<img src="${mapas[a]}" width="200" height="225">`;
-
-
-                }
+                nombreProvincia.innerHTML = `<h4>${textoDistritoEleccion}</h4>`
+                mapa.innerHTML = `<img src="${mapas[distritoEleccion - 1]}" width="200" height="225">`;
 
                 let grid = document.getElementById('grid');
                 let barraLateral = document.getElementById('barra-lateral')
@@ -304,10 +267,10 @@ async function Filtrar() {
                     const componenteRojo = Math.floor(Math.random() * 256);
                     const componenteVerde = Math.floor(Math.random() * 256);
                     const componenteAzul = Math.floor(Math.random() * 256);
-                    const colorHexadecimal = `rgb(${componenteRojo},${componenteVerde},${componenteAzul})`;
+                    const colorRGB = `rgb(${componenteRojo},${componenteVerde},${componenteAzul})`;
                     let elemento = document.createElement('div');
                     elemento.classList.add('bar');
-                    elemento.style.backgroundColor = colorHexadecimal
+                    elemento.style.backgroundColor = colorRGB
                     elemento.style.setProperty('--bar-value',agrupacion.votosPorcentaje + '%');
                     elemento.dataset.name = agrupacion.nombreAgrupacion;
                     elemento.title = agrupacion.votosPorcentaje + '%';
@@ -358,7 +321,7 @@ async function Filtrar() {
                             
                             let progressBar = document.createElement('div')
                             progressBar.classList.add('progress-bar')
-                            progressBar.style.backgroundColor = colorHexadecimal
+                            progressBar.style.backgroundColor = colorRGB
                             progressBar.style.width = `${p}%`
                             let progressText = document.createElement('span')
                             progressText.classList.add('progress-bar-text')
@@ -406,7 +369,7 @@ async function Filtrar() {
                             
                             let progressBar = document.createElement('div')
                             progressBar.classList.add('progress-bar')
-                            progressBar.style.backgroundColor = colorHexadecimal
+                            progressBar.style.backgroundColor = colorRGB
                             progressBar.style.width = `${p}%`
                             let progressText = document.createElement('span')
                             progressText.classList.add('progress-bar-text')
@@ -426,7 +389,7 @@ async function Filtrar() {
                 
             }
 
-
+            mostrarCuadros("verde");
             
         } catch (error) {
             console.error('Error en respuesta: ' + error);
@@ -437,8 +400,7 @@ async function Filtrar() {
         }
     }
     else{
-        console.log(    'ELSE '   )
-        mostrarCuadros("verde");
+        mostrarCuadros("amarillo");
         tapar.style.display = 'flex'
     }
     
@@ -449,9 +411,10 @@ async function mostrarCuadros(color) {
     switch(color){
         case "rojo":
             mensajeClass = "msj-rojo";
+            break;
         case "verde":
             mensajeClass = "msj-verde";
-
+            break;
         default:
             mensajeClass = "msj-amarillo";
 
