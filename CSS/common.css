@@ -333,6 +333,7 @@ h3 {
   text-transform: uppercase;
   border: none;
   width: 150px;
+  cursor: pointer;
 }
 .agregar-informe:hover{
   color: var(--textos);

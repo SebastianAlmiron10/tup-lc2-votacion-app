@@ -21,14 +21,14 @@ function agregarHTML(){
             
             newElement.innerHTML += `
             <td class="td-eleccion">
-                <p class="texto-elecciones-chico">${nameProvincias[elemento[4]]}</p>
+                <p class="texto-elecciones-chico">${nameProvincias[elemento[4] - 1]}</p>
                 <div>
-                <img src="${mapas[elemento[4]]}" width="90" height="120">
+                <img src="${mapas[elemento[4] - 1]}" width="90" height="120">
                 </div>  
             </td>
             <td  class="td-eleccion year-eleccion">
                 <p class="texto-elecciones-chico">Elecciones ${elemento[0]} | Generales</p>
-                <p class="texto-path-chico">${elemento[0]} > Generales > Provisorio > ${cargosPoliticos[elemento[3] - 1]} > ${nameProvincias[elemento[4]]}</p>
+                <p class="texto-path-chico">${elemento[0]} > ${elemento[1] == 1 ? 'PASO' : 'Generales' } > Provisorio > ${cargosPoliticos[elemento[3] - 1]} > ${nameProvincias[elemento[4] - 1]}</p>
             </td>
             
             <td class="td-eleccion datos-generales">
