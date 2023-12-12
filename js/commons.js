@@ -271,6 +271,7 @@ async function Filtrar() {
                 barraLateral.textContent = ''
                 grid.innerHTML = ''
                 let contador = 0
+                let votoP;
 
                 // ordenar resultados de mayor a menor
                 resultados.valoresTotalizadosPositivos.sort((a, b) => b.votosPorcentaje - a.votosPorcentaje);
@@ -286,13 +287,14 @@ async function Filtrar() {
                     elemento.style.setProperty('--bar-value',agrupacion.votosPorcentaje + '%');
                     elemento.dataset.name = agrupacion.nombreAgrupacion;
                     elemento.title = agrupacion.votosPorcentaje + '%';
+                    votoP = agrupacion.votosPorcentaje
                     grid.appendChild(elemento)
                     contador += 1
                     let hr = document.createElement('hr')
                     let br = document.createElement('br')
                     let divPadre = document.createElement('div')
                     let pNombreN1 = document.createElement('p')
-                    pNombreN1.textContent = agrupacion.nombreAgrupacion
+                    pNombreN1.textContent = `${agrupacion.nombreAgrupacion} (Total: ${agrupacion.votosPorcentaje}%)`
                     divPadre.appendChild(pNombreN1)
                     divPadre.appendChild(hr)
 
@@ -365,7 +367,7 @@ async function Filtrar() {
                             
                             let porsentajeLista = document.createElement('p')
                             let p = Number((agrupacion.votos * 100 / agrupacion.votos).toFixed(2))
-                            porsentajeLista.textContent = `${p}%`
+                            porsentajeLista.textContent = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
                             divPVotos.appendChild(porsentajeLista)
                             
                             let votosLista = document.createElement('p')
@@ -382,10 +384,10 @@ async function Filtrar() {
                             let progressBar = document.createElement('div')
                             progressBar.classList.add('progress-bar')
                             progressBar.style.backgroundColor = colorRGB
-                            progressBar.style.width = `${p}%`
+                            progressBar.style.width = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
                             let progressText = document.createElement('span')
                             progressText.classList.add('progress-bar-text')
-                            progressText.textContent = `${p}%`
+                            progressText.textContent = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
                             
                             progressBar.appendChild(progressText)
                             progress.appendChild(progressBar)
