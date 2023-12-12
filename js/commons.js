@@ -9,16 +9,16 @@ setTimeout(() => {
     
     if (pgTexto === 'GENERALES') {
         tipoEleccion = 1;
-        eleccion = 'PASOS'
+        eleccion = 'PASOS';
     } else if (pgTexto === 'PASOS') {
         tipoEleccion = 2;
-        eleccion = 'GENERALES'
+        eleccion = 'GENERALES';
     }
     
 },2000);
 
 let data;
-const url = 'https://resultados.mininterior.gob.ar/api/'
+const url = 'https://resultados.mininterior.gob.ar/api/';
 let selectFecha = document.getElementById('filtro-year');
 let selectCargo = document.getElementById('filtro-cargo');
 let selectDistrito = document.getElementById('filtro-distrito');
@@ -26,7 +26,7 @@ let selectSeccion = document.getElementById('filtro-seccion');
 let tapar = document.getElementById('tapar');
 let fld = document.getElementById('FLD');
 let gif = document.getElementById('gif');
-gif.style.display = 'none'
+gif.style.display = 'none';
 
 let anioEleccion;
 let tipoRecuento = 1;
@@ -38,7 +38,6 @@ let textoDistritoEleccion;
 let textoCargoEleccion;
 
 let filtrarConteo = 0;
-
 
 
 
@@ -70,16 +69,17 @@ selectFecha.addEventListener('change', function() {
     selectDistrito.innerHTML = '<option disabled selected hidden>Distrito</option><option disabled>Seleccione un cargo</option>';
     selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
     z = true;
-     
+      
     anioEleccion = selectFecha.value;
     anioSeleccionado = true;
 
-    distritoEleccion = undefined
-    seccionEleccion = undefined
-    cargoEleccion = undefined
+    cargoEleccion = undefined;
+    distritoEleccion = undefined;
+    seccionEleccion = undefined;
+    
     
     // 1 PASO - 2 Generales - 3 Ballotage
-    cargarOpciones(anioEleccion, 2);
+    cargarOpciones(anioEleccion, tipoEleccion);
 });
 
 // Modificar el evento change de selectCargo
@@ -155,9 +155,9 @@ filtrarConteo = 1;
 async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
     try {
         
-        tapar.style.display = 'flex'
-        fld.style.display = 'block'
-        gif.style.display = 'none'
+        tapar.style.display = 'flex';
+        fld.style.display = 'block';
+        gif.style.display = 'none';
         const seccionSeleccionada = selectSeccion.value;
         
         let response = await fetch(`${url}menu?año=${anioEleccion}`);
@@ -167,7 +167,7 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
         
         
         data.forEach(item => {
-            if (item.Cargos && item.Cargos.length > 0 && item.IdEleccion === idEleccion) {
+            if ((item.Cargos) && (item.Cargos.length > 0) && (item.IdEleccion === idEleccion)) {
                 
                 item.Cargos.forEach(cargo => {
                     if (z == true) {
@@ -176,7 +176,7 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                         optionCargo.value = cargo.IdCargo;
                         selectCargo.appendChild(optionCargo);
                     }
-                    if (cargoEleccion && cargo.IdCargo === cargoEleccion) {
+                    if ((cargoEleccion) && (cargo.IdCargo === cargoEleccion)) {
 
                         const distritos = cargo.Distritos; //JSON
 
@@ -188,16 +188,15 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
                                 selectDistrito.appendChild(optionDistrito);
                                 distritoEleccion = selectDistrito.value;
                             }
-                            v = true;
+                            v = true; // Bandera para Verificar que esten todos los Datos
 
-                            if (distritoEleccion && distrito.IdDistrito == distritoEleccion) {
+                            if ((distritoEleccion) && (distrito.IdDistrito == distritoEleccion)) {
                                 const seccionesProvinciales = distrito.SeccionesProvinciales;
-                                if (seccionesProvinciales && seccionesProvinciales.length > 0) {
-
+                                if ((seccionesProvinciales) && (seccionesProvinciales.length > 0)) {
                                     seccionesProvinciales.forEach(seccionProvincial => {
                                         const secciones = seccionProvincial.Secciones;
-                                        if (secciones && secciones.length > 0) {
-                                            selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>'
+                                        if ((secciones) && (secciones.length > 0)) {
+                                            selectSeccion.innerHTML = '<option disabled selected hidden>Seccion</option>';
                                             secciones.forEach(seccion => {
                                                 let optionSeccion = document.createElement('option');
                                                 optionSeccion.textContent = seccion.Seccion || 'Sin especificar';
@@ -225,22 +224,21 @@ async function cargarOpciones(anioEleccion, idEleccion, cargoEleccion = null) {
 async function Filtrar() {
     
     if (!(anioEleccion == undefined || cargoEleccion == undefined || distritoEleccion == undefined || seccionEleccion == undefined)){
-        console.log(    'IF '   )
-        gif.style.display = 'block'
-        fld.style.display = 'none'
+        gif.style.display = 'block';
+        fld.style.display = 'none';
         setTimeout(() => {
-            console.log(    'SETTIME'    )
-            tapar.style.display = 'none'
+            tapar.style.display = 'none';
+            mostrarCuadros("verde");
+            document.getElementById("msj-verde").innerHTML = '<i class="fa-solid fa-thumbs-up iconos"></i>Datos Cargados Correctamente';
         }, 1000)
         try {
-            console.log(    'TRY '   )
             if (v == true){
 
                 let titulo = document.getElementById('titulo-combo');
                 titulo.innerHTML = `Elecciones ${anioEleccion} | ${tipoEleccion == 2 ? eleccion.charAt(0).toUpperCase() + eleccion.slice(1).toLowerCase() : eleccion}`;
                 
                 let path = document.getElementById('texto-path');
-                path.innerHTML = `${anioEleccion} > ${eleccion} > ${textoCargoEleccion} > ${textoDistritoEleccion.toUpperCase()} > ${textoSeccionEleccion.toUpperCase()}`
+                path.innerHTML = `${anioEleccion} > ${eleccion} > ${textoCargoEleccion} > ${textoDistritoEleccion.toUpperCase()} > ${textoSeccionEleccion.toUpperCase()}`;
                 
                 let response = await fetch(`https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoEleccion}&distritoId=${distritoEleccion}&seccionId=${seccionEleccion}`);
                 let resultados = await response.json();
@@ -267,11 +265,10 @@ async function Filtrar() {
                 mapa.innerHTML = `<img src="${mapas[distritoEleccion - 1]}" width="200" height="225">`;
 
                 let grid = document.getElementById('grid');
-                let barraLateral = document.getElementById('barra-lateral')
-                barraLateral.textContent = ''
-                grid.innerHTML = ''
-                let contador = 0
-                let votoP;
+                let barraLateral = document.getElementById('barra-lateral');
+                barraLateral.textContent = '';
+                grid.innerHTML = '';
+                let contador = 0;
 
                 // ordenar resultados de mayor a menor
                 resultados.valoresTotalizadosPositivos.sort((a, b) => b.votosPorcentaje - a.votosPorcentaje);
@@ -287,135 +284,134 @@ async function Filtrar() {
                     elemento.style.setProperty('--bar-value',agrupacion.votosPorcentaje + '%');
                     elemento.dataset.name = agrupacion.nombreAgrupacion;
                     elemento.title = agrupacion.votosPorcentaje + '%';
-                    votoP = agrupacion.votosPorcentaje
-                    grid.appendChild(elemento)
-                    contador += 1
-                    let hr = document.createElement('hr')
-                    let br = document.createElement('br')
-                    let divPadre = document.createElement('div')
-                    let pNombreN1 = document.createElement('p')
-                    pNombreN1.textContent = `${agrupacion.nombreAgrupacion} (Total: ${agrupacion.votosPorcentaje}%)`
-                    divPadre.appendChild(pNombreN1)
-                    divPadre.appendChild(hr)
+                    grid.appendChild(elemento);
+                    contador += 1;
+                    let hr = document.createElement('hr');
+                    let br = document.createElement('br');
+                    let divPadre = document.createElement('div');
+                    let pNombreN1 = document.createElement('p');
+                    pNombreN1.textContent = agrupacion.nombreAgrupacion;
+                    divPadre.appendChild(pNombreN1);
+                    divPadre.appendChild(hr);
 
                     if (agrupacion.listas != undefined) {
                         agrupacion.listas.forEach( lista => {
                             
-                            let divHijoMayor = document.createElement('div')
-                            divHijoMayor.appendChild(br)
+                            let divHijoMayor = document.createElement('div');
+                            divHijoMayor.appendChild(br);
                             
-                            let divHijoPP = document.createElement('div')
-                            divHijoPP.classList.add('partidos-porcentaje')
+                            let divHijoPP = document.createElement('div');
+                            divHijoPP.classList.add('partidos-porcentaje');
                             
-                            let divPartidos = document.createElement('div')
-                            divPartidos.classList.add('partidos')
+                            let divPartidos = document.createElement('div');
+                            divPartidos.classList.add('partidos');
                             
-                            let nombreLista = document.createElement('p')
-                            nombreLista.textContent = lista.nombre
-                            divPartidos.appendChild(nombreLista)
-                            divHijoPP.appendChild(divPartidos)
-                            let divPVotos = document.createElement('div')
-                            divPVotos.classList.add('porcentaje-votos')
+                            let nombreLista = document.createElement('p');
+                            nombreLista.textContent = lista.nombre;
+                            divPartidos.appendChild(nombreLista);
+                            divHijoPP.appendChild(divPartidos);
+                            let divPVotos = document.createElement('div');
+                            divPVotos.classList.add('porcentaje-votos');
                             
-                            let porsentajeLista = document.createElement('p')
-                            let p = Number((lista.votos * 100 / agrupacion.votos).toFixed(2))
-                            porsentajeLista.textContent = `${p}%`
-                            divPVotos.appendChild(porsentajeLista)
+                            let porsentajeLista = document.createElement('p');
+                            let p = Number((lista.votos * 100 / agrupacion.votos).toFixed(2));
+                            porsentajeLista.textContent = `${p}%`;
+                            divPVotos.appendChild(porsentajeLista);
                             
-                            let votosLista = document.createElement('p')
-                            votosLista.textContent = lista.votos
-                            divPVotos.appendChild(votosLista)
-                            divHijoPP.appendChild(divPVotos)
+                            let votosLista = document.createElement('p');
+                            votosLista.textContent = lista.votos;
+                            divPVotos.appendChild(votosLista);
+                            divHijoPP.appendChild(divPVotos);
                             
-                            divHijoMayor.appendChild(divHijoPP)
+                            divHijoMayor.appendChild(divHijoPP);
                             
-                            let progress = document.createElement('div')
-                            progress.classList.add('progress')
-                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`
+                            let progress = document.createElement('div');
+                            progress.classList.add('progress');
+                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`;
                             
-                            let progressBar = document.createElement('div')
-                            progressBar.classList.add('progress-bar')
-                            progressBar.style.backgroundColor = colorRGB
-                            progressBar.style.width = `${p}%`
-                            let progressText = document.createElement('span')
-                            progressText.classList.add('progress-bar-text')
-                            progressText.textContent = `${p}%`
+                            let progressBar = document.createElement('div');
+                            progressBar.classList.add('progress-bar');
+                            progressBar.style.backgroundColor = colorRGB;
+                            progressBar.style.width = `${p}%`;
+                            let progressText = document.createElement('span');
+                            progressText.classList.add('progress-bar-text');
+                            progressText.textContent = `${p}%`;
                             
-                            progressBar.appendChild(progressText)
-                            progress.appendChild(progressBar)
+                            progressBar.appendChild(progressText);
+                            progress.appendChild(progressBar);
                             
-                            divHijoMayor.appendChild(progress)
-                            divPadre.appendChild(divHijoMayor)
+                            divHijoMayor.appendChild(progress);
+                            divPadre.appendChild(divHijoMayor);
 
                         });
                     }else{
-                            let divHijoMayor = document.createElement('div')
-                            divHijoMayor.appendChild(br)
+                            let divHijoMayor = document.createElement('div');
+                            divHijoMayor.appendChild(br);
                             
-                            let divHijoPP = document.createElement('div')
-                            divHijoPP.classList.add('partidos-porcentaje')
+                            let divHijoPP = document.createElement('div');
+                            divHijoPP.classList.add('partidos-porcentaje');
                             
-                            let divPartidos = document.createElement('div')
-                            divPartidos.classList.add('partidos')
+                            let divPartidos = document.createElement('div');
+                            divPartidos.classList.add('partidos');
                             
-                            let nombreLista = document.createElement('p')
-                            nombreLista.textContent = agrupacion.nombre
-                            divPartidos.appendChild(nombreLista)
-                            divHijoPP.appendChild(divPartidos)
-                            let divPVotos = document.createElement('div')
-                            divPVotos.classList.add('porcentaje-votos')
+                            let nombreLista = document.createElement('p');
+                            nombreLista.textContent = agrupacion.nombre;
+                            divPartidos.appendChild(nombreLista);
+                            divHijoPP.appendChild(divPartidos);
+                            let divPVotos = document.createElement('div');
+                            divPVotos.classList.add('porcentaje-votos');
                             
-                            let porsentajeLista = document.createElement('p')
-                            let p = Number((agrupacion.votos * 100 / agrupacion.votos).toFixed(2))
-                            porsentajeLista.textContent = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
-                            divPVotos.appendChild(porsentajeLista)
+                            let porsentajeLista = document.createElement('p');
+                            let p = Number((agrupacion.votos * 100 / agrupacion.votos).toFixed(2));
+                            porsentajeLista.textContent = `${p}%`;
+                            divPVotos.appendChild(porsentajeLista);
                             
-                            let votosLista = document.createElement('p')
-                            votosLista.textContent = agrupacion.votos
-                            divPVotos.appendChild(votosLista)
-                            divHijoPP.appendChild(divPVotos)
+                            let votosLista = document.createElement('p');
+                            votosLista.textContent = agrupacion.votos;
+                            divPVotos.appendChild(votosLista);
+                            divHijoPP.appendChild(divPVotos);
                             
-                            divHijoMayor.appendChild(divHijoPP)
+                            divHijoMayor.appendChild(divHijoPP);
                             
-                            let progress = document.createElement('div')
-                            progress.classList.add('progress')
-                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`
+                            let progress = document.createElement('div');
+                            progress.classList.add('progress');
+                            progress.style.backgroundColor = `rgba(${componenteRojo},${componenteVerde},${componenteAzul},0.500)`;
                             
-                            let progressBar = document.createElement('div')
-                            progressBar.classList.add('progress-bar')
-                            progressBar.style.backgroundColor = colorRGB
-                            progressBar.style.width = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
-                            let progressText = document.createElement('span')
-                            progressText.classList.add('progress-bar-text')
-                            progressText.textContent = `${tipoEleccion == 1 ? `${p}`:`${votoP}`}%`
+                            let progressBar = document.createElement('div');
+                            progressBar.classList.add('progress-bar');
+                            progressBar.style.backgroundColor = colorRGB;
+                            progressBar.style.width = `${p}%`;
+                            let progressText = document.createElement('span');
+                            progressText.classList.add('progress-bar-text');
+                            progressText.textContent = `${p}%`;
                             
-                            progressBar.appendChild(progressText)
-                            progress.appendChild(progressBar)
+                            progressBar.appendChild(progressText);
+                            progress.appendChild(progressBar);
                             
-                            divHijoMayor.appendChild(progress)
-                            divPadre.appendChild(divHijoMayor)
+                            divHijoMayor.appendChild(progress);
+                            divPadre.appendChild(divHijoMayor);
                     }
 
-                    barraLateral.appendChild(divPadre)
+                    barraLateral.appendChild(divPadre);
 
                 });
 
                 
             }
 
-            mostrarCuadros("verde");
-            
         } catch (error) {
             console.error('Error en respuesta: ' + error);
             if (error instanceof Response) {
                 console.error('Código de estado:', error.status);
                 console.error('Mensaje de estado:', error.statusText);
             }
+            mostrarCuadros("rojo");
+            document.getElementById("msj-rojo").innerHTML = '= <i class="fa-solid fa-triangle-exclamation iconos"></i>Error:Se produjo un error al cargar los Datos';
         }
     }
     else if (filtrarConteo != 0){
-        mostrarCuadros("rojo"); 
-        document.getElementById("msj-rojo").innerHTML = '<i class="fa-solid fa-triangle-exclamation iconos"></i>Seleccione Todas las Opciones';
+        mostrarCuadros("amarillo");
+        document.getElementById("msj-amarillo").innerHTML = '<i class="fa-solid fa-exclamation iconos"></i>Seleccione Todas las Opciones';
         tapar.style.display = 'flex'
     }
     
@@ -452,7 +448,6 @@ async function agregarInforme(){
 
     
 
-    //data[i].Cargos[j].Distritos;
     
     let listaTemporal = [anioEleccion, tipoRecuento, tipoEleccion, cargoEleccion, distritoEleccion, seccionEleccion, resultados.estadoRecuento.mesasTotalizadas, resultados.estadoRecuento.cantidadElectores, resultados.estadoRecuento.participacionPorcentaje + '%', resultados];
     let flag = true;
@@ -471,7 +466,7 @@ async function agregarInforme(){
                 mostrarCuadros("amarillo");
                 document.getElementById("msj-amarillo").innerHTML = '<i class="fa-solid fa-exclamation iconos"></i>El informe que desea Agregar ya Existe';
                 flag = false;
-                return;
+                return
             }
         });
     });
@@ -483,10 +478,10 @@ async function agregarInforme(){
     }
     
     
-    // Convierte el arreglo a una cadena de texto usando JSON.stringify
+    // Converti el arreglo a una cadena de texto usando JSON.stringify
     let listaTemporalTXT = JSON.stringify(listaDatos);
 
-    // Guarda la cadena de texto en localStorage con una clave específica
+    // Guardo la cadena de texto en localStorage con una clave específica
     sessionStorage.setItem("INFORMES", listaTemporalTXT);
 
 }
